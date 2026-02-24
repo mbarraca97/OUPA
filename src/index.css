@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Londrina Solid Local';
+  src: url('./assets/fonts/flUhRq6sw40kQEJxWNgkLuudGfNeKBM.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Londrina Solid Local';
+  src: url('./assets/fonts/flUiRq6sw40kQEJxWNgkLuudGfv1CgYzlZw.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Londrina Solid Local';
+  src: url('./assets/fonts/flUiRq6sw40kQEJxWNgkLuudGfvdDwYzlZw.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Alias to match the font name used by design specs ("Londrina Solid"). */
+@font-face {
+  font-family: 'Londrina Solid';
+  src: url('./assets/fonts/flUhRq6sw40kQEJxWNgkLuudGfNeKBM.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Londrina Solid';
+  src: url('./assets/fonts/flUiRq6sw40kQEJxWNgkLuudGfv1CgYzlZw.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Londrina Solid';
+  src: url('./assets/fonts/flUiRq6sw40kQEJxWNgkLuudGfvdDwYzlZw.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Sans Local';
+  src: url('./assets/fonts/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwAopxRSW32.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bricolage Local';
+  src: url('./assets/fonts/3y9U6as8bTXq_nANBjzKo3IeZx8z6up5BeSl5jBNz_19PpbpMXuECpwUxJBOm_OJWiaaD30YfKfjZZoLvZvl-Molsg.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  font-family: 'DM Sans Local', sans-serif;
+  color-scheme: only light;
+}
+
+body {
+  margin: 0;
+}
