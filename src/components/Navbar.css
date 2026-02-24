@@ -44,7 +44,7 @@
 }
 
 .nb-navbar__contact {
-  background: #ff6a00;
+  background: #ff4035  ;
   border: 2px solid #ffffff;
   color: #ffffff;
   box-shadow: 4px 4px 0 #000000;
@@ -56,11 +56,34 @@
   font-family: "Londrina Solid", sans-serif;
 }
 
+.view-all {
+  background: #ffc200   ;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  box-shadow: 4px 4px 0 #000000;
+  border-radius: 9999px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 30px;
+  font-family: "Londrina Solid", sans-serif;
+  padding: 5px 15px;
+}
+
+.view-all:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000000;
+}
+
 .nb-navbar__contact:active {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0 #000000;
 }
 
+.nb-navbar__contact:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000000;
+}
 
 
 .nb-navbar__panel {

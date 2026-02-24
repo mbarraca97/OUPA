@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import logo from '../assets/images/E4I5wl7NhgPq40S2QazLLdYzZA.svg'
+import logoBlack from '../assets/images/oupa/logo-black.png'
 import './Navbar.css'
 
 const LINKS = [
@@ -24,14 +25,13 @@ export default function Navbar() {
     <header className="sticky top-0 z-30 px-4 pt-4 md:px-6">
       <div className="nb-navbar mx-auto max-w-6xl px-4 py-3 md:px-6 md:py-4">
         <div className="flex items-center justify-between gap-4">
-          <a
-            href="#"
-            className="flex items-center gap-3"
-            aria-label="OUPA home"
+  
+          <img
+            src={logoBlack}
+            alt="Oupa"
+            className="w-32"
             onClick={() => setOpen(false)}
-          >
-            <span className="nb-navbar__title">OUPA</span>
-          </a>
+          />
 
           <nav className="hidden items-center gap-6 md:flex" aria-label="Primary">
             {LINKS.map((l) => (

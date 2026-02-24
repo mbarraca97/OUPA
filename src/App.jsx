@@ -1,4 +1,7 @@
+import { useEffect, useRef } from 'react'
 import heroCans from './assets/images/0oFMOy5Xm89rpo0L53rzA0fpvr4.png'
+import pist from './assets/images/pist.png'
+import fundo from './assets/images/fundo.png'
 import blackCan from './assets/images/CekZngiy07rr4FTLTw2x1KTx0FM.png'
 import waterCan from './assets/images/cQ1mooXzCQzZHN8ZkGRHCoHoEGY.png'
 import strawCan from './assets/images/HVU8DJI30arjkpyNRnub8DZysdw.png'
@@ -10,12 +13,17 @@ import berries from './assets/images/MswwAB8XnYNDrd9o4g6ZHqC2MLw.png'
 import canTilt from './assets/images/yNbUcie2HCyvvKtNFvAyziYjg.png'
 import avatarEmma from './assets/images/8rlG4yox0w8UXpoOaYWvFzPZTs.png'
 import avatarJames from './assets/images/Yb8nDxvwZAN07pPgqJS26suXipM.jpg'
+import gelado from './assets/images/Gelado Sem Fundo.png'
+import mmVermelho from './assets/images/M_M vermelho sem fundo.png'
+import oupaLogoWhite from './assets/images/oupa/logo_white.png'
+import oreo from './assets/images/oreo.png'
+import oreos from './assets/images/oreos.png'
 import Navbar from './components/Navbar'
 
 const products = [
-  { name: 'Blackberry Blast', price: '$15', image: blackCan },
-  { name: 'Watermelon Wave', price: '$10', image: waterCan },
-  { name: 'Strawberry Fizz', price: '$12', image: strawCan },
+  { name: 'Caixa de Gelado', price: '$15', image: blackCan },
+  { name: 'Copo de Gelado', price: '$10', image: waterCan },
+  { name: 'Oupa Shot', price: '$12', image: strawCan },
 ]
 
 const faq = [
@@ -28,28 +36,114 @@ const faq = [
 ]
 
 export default function App() {
+  const aboutZoomImgRef = useRef(null)
+
+  useEffect(() => {
+    const el = aboutZoomImgRef.current
+    if (!el) return
+
+    const media = window.matchMedia?.('(prefers-reduced-motion: reduce)')
+    if (media?.matches) return
+
+    let raf = 0
+
+    function clamp(v, min, max) {
+      return Math.min(max, Math.max(min, v))
+    }
+
+    function update() {
+      raf = 0
+      const rect = el.getBoundingClientRect()
+      const vh = window.innerHeight || 1
+
+      // progress: 0 when the element just enters from the bottom, 1 when it has fully passed upwards
+      const progress = clamp((vh - rect.top) / (vh + rect.height), 0, 1)
+      const scale = 1 + progress * 0.08 // subtle zoom
+
+      el.style.transform = `translateZ(0) scale(${scale.toFixed(4)})`
+    }
+
+    function onScrollOrResize() {
+      if (raf) return
+      raf = window.requestAnimationFrame(update)
+    }
+
+    update()
+    window.addEventListener('scroll', onScrollOrResize, { passive: true })
+    window.addEventListener('resize', onScrollOrResize)
+
+    return () => {
+      if (raf) window.cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', onScrollOrResize)
+      window.removeEventListener('resize', onScrollOrResize)
+    }
+  }, [])
+
   return (
     <main className="bg-pink-300 text-stone-900">
       <Navbar />
 
-      <section className="relative overflow-hidden px-4 pb-16 pt-12 md:px-6 md:pb-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2">
-          <div>
-            <h1 className="font-display text-[5rem] uppercase leading-[0.85] text-indigo-700 md:text-[8rem]">zoooom</h1>
-            <p className="mt-4 max-w-md text-xl font-bold uppercase">The energy of nature in every bottle</p>
-            <button className="mt-6 rounded-full bg-indigo-700 px-8 py-3 text-base font-bold uppercase text-white">Buy Now</button>
-          </div>
-          <div className="relative mx-auto w-full max-w-xl">
-            <img src={heroCans} alt="Zoooom cans" className="w-full" />
-            <img src={lemonSlice} alt="Lemon" className="absolute -bottom-8 -left-8 h-24 w-24 animate-spin-slow" />
-            <img src={orange} alt="Orange" className="absolute -right-8 top-8 w-24 rotate-12 md:w-36" />
+      <section className="relative overflow-hidden px-4 pb-16 pt-[150px] md:px-6 md:pb-24 md:mt-[-150px]">
+        {/* Top-right corner accent (rotated + partially out of frame) */}
+        <img
+          src={gelado}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-24 -top-24 w-[22rem] rotate-[-45deg] opacity-95 md:-right-[30rem] md:-top-[40rem] md:w-[70rem] "
+        />
+
+        <div className="mx-auto max-w-6xl">
+          <div className="relative flex w-full flex-col items-center justify-center gap-8 pt-[100px]">
+            {/* Center-left floating image (absolute on desktop so it doesn't affect centering) */}
+            <img
+              src={oreo}
+              alt="oreo"
+              className="w-44 animate-float-slow select-none md:hidden"
+              draggable="false"
+            />
+            <img
+              src={oreo}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute left-[-5rem] mt-[-130px] hidden w-[300px]  animate-float-slow select-none md:block"
+              draggable="false"
+            />
+
+            <div className="mx-auto text-center">
+              {/* Main logo replaces H1 */}
+              <h1
+                className="font-display text-[220px] uppercase text-white leading-none"
+              > OUPAAAAA</h1>
+
+              {/* Paragraph under logo (Londrina) */}
+              <p className="mt-12 font-display text-xl  uppercase text-stone-900 md:text-[60px]">
+               Vai um gelado?
+              </p>
+
+              {/* Button row + floating image to the right */}
+              <div className="mt-16 flex flex-col items-center justify-center gap-5 sm:flex-row sm:justify-center pt-16">
+                <button className="rounded-full border-2 border-white bg-yellow-300 px-8 py-3 font-display text-[30px] font-[300] uppercase text-white shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000]">
+                  Saber Mais
+                </button>
+
+             
+              </div>
+      
+            <img
+              src={mmVermelho}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute right-[-12rem] top-1/2 hidden w-[600px] animate-float-slow select-none md:block"
+              draggable="true"
+            />
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="products" className="bg-indigo-800 px-4 py-16 text-cream md:px-6">
+      <section id="products" className="bg-[#ff6700] px-16 py-24 text-cream md:px-6">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-center font-display text-5xl uppercase md:text-6xl">Popular <span className="text-lime-300">products</span></h2>
+          <h2 className="text-center font-display text-5xl uppercase md:text-[100px]"> Produtos <span className="text-lime-300">Populares</span></h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {products.map((item) => (
               <article key={item.name} className="rounded-[2rem] border-2 border-black bg-cream p-5 text-stone-900">
@@ -63,17 +157,41 @@ export default function App() {
             ))}
           </div>
           <div className="mt-8 text-center">
-            <button className="rounded-full border-2 border-cream px-8 py-3 text-sm font-bold uppercase">VIEW ALL PRODUCTS</button>
+            <button className="view-all">VIEW ALL PRODUCTS</button>
           </div>
         </div>
       </section>
 
-      <section id="about" className="px-4 py-16 md:px-6">
+      <section id="about" className="px-4 py-16 md:px-6 bg-[#ff6700]">
         <div className="mx-auto max-w-6xl">
-          <h3 className="font-display text-4xl uppercase md:text-6xl"><span className="text-indigo-700">Zoooom</span> is a naturally fermented tea that fills you with energy and health.</h3>
-          <div className="mt-8 grid items-center gap-10 md:grid-cols-2">
-            <img src={heroCans} alt="Cans" className="w-full rounded-[2rem] border-2 border-stone-900 bg-white p-6" />
-            <p className="font-body text-lg">Each sip is a combination of ancient traditions and modern technology.</p>
+          <h3 className="font-display text-6xl uppercase md:text-[68px] text-center text-white">a <span className="text-yellow-200">oupa</span> é uma marca de gelados artesanais que te vai fazer comer e chorar por mais.</h3>
+          <div className="relative mt-10 flex items-center justify-center">
+            {/* Left floating image (on top) */}
+            <img
+              src={pist}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute left-[-5rem] mt-[-180px] w-40 animate-float-slow select-none z-[4] md:w-[450px]"
+              draggable="false"
+            />
+
+            {/* Big centered image (no background) */}
+            <img
+              src={fundo}
+              alt="Cans"
+              ref={aboutZoomImgRef}
+              className="relative z-[3] w-[140vw] max-w-none origin-center select-none md:w-[2600px] will-change-transform"
+              draggable="false"
+            />
+
+            {/* Right floating image (behind) */}
+            <img
+              src={mmVermelho}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute right-[-6rem] top-1/2 w-48 -translate-y-1/2 animate-float-slow select-none z-[2] md:right-[-2rem] md:w-80"
+              draggable="false"
+            />
           </div>
         </div>
       </section>
