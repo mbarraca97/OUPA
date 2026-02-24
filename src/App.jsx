@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react'
 import heroCans from './assets/images/0oFMOy5Xm89rpo0L53rzA0fpvr4.png'
-import pist from './assets/images/pist.png'
+import pist1 from './assets/images/pist.png'
+import pist from './assets/images/pist2.png'
 import fundo from './assets/images/fundo.png'
+import fundBg from './assets/images/fund.png'
 import blackCan from './assets/images/CekZngiy07rr4FTLTw2x1KTx0FM.png'
-import waterCan from './assets/images/cQ1mooXzCQzZHN8ZkGRHCoHoEGY.png'
+import copo from './assets/images/copo.png'
 import strawCan from './assets/images/HVU8DJI30arjkpyNRnub8DZysdw.png'
 import boxPack from './assets/images/GoIeXeiU0JXucLyD8eiegaewLeU.png'
 import kiwi from './assets/images/26rDkkEPoHiNSRhg7FvTTrGP7Lg.png'
@@ -21,8 +23,8 @@ import oreos from './assets/images/oreos.png'
 import Navbar from './components/Navbar'
 
 const products = [
-  { name: 'Caixa de Gelado', price: '$15', image: blackCan },
-  { name: 'Copo de Gelado', price: '$10', image: waterCan },
+  { name: 'Caixa de Gelado', price: '$15', image: gelado },
+  { name: 'Copo de Gelado', price: '$10', image: copo },
   { name: 'Oupa Shot', price: '$12', image: strawCan },
 ]
 
@@ -146,13 +148,13 @@ export default function App() {
           <h2 className="text-center font-display text-5xl uppercase md:text-[100px]"> Produtos <span className="text-lime-300">Populares</span></h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {products.map((item) => (
-              <article key={item.name} className="rounded-[2rem] border-2 border-black bg-cream p-5 text-stone-900">
+              <article
+                key={item.name}
+                className="rounded-[2rem] border-2 border-black bg-center bg-cover bg-no-repeat p-5 text-stone-900"
+                style={{ backgroundImage: `url(${fundBg})` }}
+              >
                 <img src={item.image} alt={item.name} className="mx-auto h-72 object-contain" />
-                <h3 className="mt-4 font-display text-3xl uppercase">{item.name}</h3>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-2xl font-black">{item.price}</span>
-                  <button className="rounded-full bg-indigo-700 px-4 py-2 text-sm font-bold uppercase text-white">ADD TO CART</button>
-                </div>
+                <h3 className="mt-4 font-display text-3xl uppercase text-white text-center">{item.name}</h3>
               </article>
             ))}
           </div>
@@ -171,7 +173,7 @@ export default function App() {
               src={pist}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute left-[-5rem] mt-[-180px] w-40 animate-float-slow select-none z-[4] md:w-[450px]"
+              className="pointer-events-none absolute left-[-5rem] mt-[-180px] w-40 animate-float-slow select-none z-[2] md:w-[450px]"
               draggable="false"
             />
 
@@ -194,6 +196,10 @@ export default function App() {
             />
           </div>
         </div>
+        <h3 className="font-display text-6xl uppercase md:text-[68px] text-center text-white">a <span className="text-yellow-200">oupa</span> é uma marca de gelados artesanais que te vai fazer comer e chorar por mais.</h3>
+        <div className="mt-8 text-center">
+            <button className="view-all">saber mais</button>
+          </div>
       </section>
 
       <section id="how" className="bg-lime-300 px-4 py-16 md:px-6">
@@ -218,6 +224,7 @@ export default function App() {
             </div>
           </div>
         </div>
+    
       </section>
 
       <section className="bg-indigo-700 px-4 py-16 text-cream md:px-6">
