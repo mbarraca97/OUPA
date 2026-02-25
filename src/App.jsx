@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
-import heroCans from './assets/images/0oFMOy5Xm89rpo0L53rzA0fpvr4.png'
-import pist1 from './assets/images/pist.png'
+import { useEffect, useRef, useState } from 'react'
+import copoShot from './assets/images/coposhot.png'
+import caixafechada from './assets/images/caixafechada.png'
 import pist from './assets/images/pist2.png'
 import fundo from './assets/images/fundo.png'
 import fundBg from './assets/images/fund.png'
@@ -20,12 +20,17 @@ import mmVermelho from './assets/images/M_M vermelho sem fundo.png'
 import oupaLogoWhite from './assets/images/oupa/logo_white.png'
 import oreo from './assets/images/oreo.png'
 import oreos from './assets/images/oreos.png'
+import rightImg from './assets/images/right.png'
+import leftImg from './assets/images/left.png'
+import icon1 from './assets/images/svg/1.png'
+import icon2 from './assets/images/svg/2.png'
+import icon3 from './assets/images/svg/3.png'
 import Navbar from './components/Navbar'
 
 const products = [
-  { name: 'Caixa de Gelado', price: '$15', image: gelado },
+  { name: 'Caixa de Gelado', price: '$15', image: caixafechada },
   { name: 'Copo de Gelado', price: '$10', image: copo },
-  { name: 'Oupa Shot', price: '$12', image: strawCan },
+  { name: 'Oupa Shot', price: '$12', image: copoShot },
 ]
 
 const faq = [
@@ -37,8 +42,42 @@ const faq = [
   'Can I drink Zoooom every day?',
 ]
 
+const REVIEWS = [
+  {
+    title: 'Sabe mesmo a caseiro!',
+    body: 'A textura é super cremosa e o sabor é intenso — dá para perceber que é feito com ingredientes de verdade. Virou tradição cá em casa ao domingo.',
+    name: 'Inês M.',
+    meta: 'Porto',
+  },
+  {
+    title: 'A melhor carrinha de gelados',
+    body: 'Contratámos para um aniversário e foi um sucesso total. Atendimento impecável, gelados artesanais e toda a gente repetiu (eu incluído).',
+    name: 'Rui A.',
+    meta: 'Lisboa',
+  },
+  {
+    title: 'Doce, mas no ponto certo',
+    body: 'Não é enjoativo, é equilibrado e fresco. O sabor a fruta parece mesmo fruta — nada artificial. Recomendo muito!',
+    name: 'Beatriz S.',
+    meta: 'Braga',
+  },
+  {
+    title: 'Crocante + cremoso = perfeito',
+    body: 'Adorei a mistura de toppings e a base do gelado. Dá para sentir o cuidado artesanal. Já quero provar todos os sabores.',
+    name: 'Miguel P.',
+    meta: 'Aveiro',
+  },
+  {
+    title: 'Feito com amor (e nota-se)',
+    body: 'Levei para um evento de empresa e foi a estrela da festa. Gelados incríveis, equipa simpática e tudo muito bem organizado.',
+    name: 'Sofia T.',
+    meta: 'Coimbra',
+  },
+]
+
 export default function App() {
   const aboutZoomImgRef = useRef(null)
+  const [reviewIdx, setReviewIdx] = useState(0)
 
   useEffect(() => {
     const el = aboutZoomImgRef.current
@@ -82,7 +121,7 @@ export default function App() {
   }, [])
 
   return (
-    <main className="bg-pink-300 text-stone-900">
+    <main className="bg-[#4bc7dc] text-stone-900">
       <Navbar />
 
       <section className="relative overflow-hidden px-4 pb-16 pt-[150px] md:px-6 md:pb-24 md:mt-[-150px]">
@@ -118,7 +157,7 @@ export default function App() {
               > OUPAAAAA</h1>
 
               {/* Paragraph under logo (Londrina) */}
-              <p className="mt-12 font-display text-xl  uppercase text-stone-900 md:text-[60px]">
+              <p className="mt-12 font-display text-xl  uppercase text-stone-900 md:text-[60px] text-[#ff4035]">
                Vai um gelado?
               </p>
 
@@ -227,45 +266,152 @@ export default function App() {
     
       </section>
 
-      <section className="bg-indigo-700 px-4 py-16 text-cream md:px-6">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-2">
-          <div>
-            <h2 className="font-display text-5xl uppercase md:text-6xl">Try the entire <span className="text-lime-300">Zoooom</span> line!</h2>
-            <p className="mt-4">Want to experience the variety of flavors and benefits of kombucha? Our tasting kit is the perfect choice.</p>
-          </div>
-          <div className="relative mx-auto w-full max-w-md">
-            <img src={boxPack} alt="Box" className="w-full rounded-3xl" />
-            <img src={canTilt} alt="Can" className="absolute -bottom-10 -left-10 w-44" />
+      <section className="bg-pink-300  py-16 text-cream px-24">
+        <div className="mx-auto ">
+          <div className="flex flex-col items-center gap-10 md:flex-row md:items-start">
+            {/* Left (60%) */}
+            <div className="w-full md:w-3/5">
+              <h2 className="font-display text-5xl uppercase md:text-[100px] text-black">
+                Conheça a nossa <span className="text-lime-300">Oupa</span> truck!
+              </h2>
+
+              <div className=" flex flex-col gap-6 md:flex-row md:items-start">
+                {/* Left inner: image */}
+                <div className="md:w-1/2">
+                  <img
+                    src={leftImg}
+                    alt=""
+                    aria-hidden="true"
+                    className="w-full max-w-none select-none mt-[-100px] ml-[-40px]"
+                    draggable="false"
+                  />
+                </div>
+
+                {/* Right inner: text + icon boxes */}
+                <div className="md:w-1/2">
+                  <p className="font-display text-xl font-[300] uppercase md:text-3xl mt-[100px] text-black">
+Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces, sem muita letra!                  </p>
+
+                  <div className="mt-6 grid grid-cols-3 gap-3">
+                    {[
+                      { label: 'Casamentos e Eventos', iconSrc: icon1 },
+                      { label: 'Festas Corporativas', iconSrc: icon2 },
+                      { label: 'Festas Populares', iconSrc: icon3 },
+                    ].map((f) => (
+                      <div
+                        key={f.label}
+                        className=" p-3 text-center text-black"
+                      >
+                        <div className="mx-auto flex h-30 w-30 items-center justify-center text-black">
+                          <img
+                            src={f.iconSrc}
+                            alt=""
+                            aria-hidden="true"
+                            className="h-30 w-30 select-none object-contain"
+                            draggable="false"
+                          />
+                        </div>
+                        <div className="mt-2 font-display text-sm font-[300] uppercase leading-tight text-black">
+                          {f.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right (40%) */}
+            <div className="w-full md:w-2/5">
+              <img
+                src={rightImg}
+                alt=""
+                aria-hidden="true"
+                className="mx-auto w-full max-w-none select-none mr-[-100px]"
+                draggable="false"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="reviews" className="px-4 py-16 md:px-6">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="font-display text-5xl uppercase md:text-6xl">What people say about zoooom</h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            <article className="rounded-3xl border-2 border-stone-900 bg-cream p-6">
-              <p className="font-display text-3xl uppercase">The best kombucha I’ve ever tried!</p>
-              <p className="mt-3">I love how natural and refreshing it tastes. It’s not too sweet, just perfectly balanced!</p>
-              <div className="mt-5 flex items-center gap-4">
-                <img src={avatarEmma} alt="Emma R." className="h-16 w-16 rounded-full object-cover" />
-                <div>
-                  <p className="font-bold">Emma R.</p>
-                  <p className="text-sm">nutritionist & wellness coach</p>
-                </div>
+      <section id="reviews" className="px-4 pb-16 md:px-6 bg-[#ff4035]">
+        <div className="mx-auto max-w-6xl text-center">
+          <div>
+          <h2 className="font-display text-5xl uppercase md:text-6xl text-white pt-16">O que dizem</h2>
+          <h2 className="font-display text-5xl uppercase md:text-[100px] text-white pb-16"> sobre a <span className="text-[#4bc7dc]">oupaaaaa</span></h2>
+          </div>
+          <div className="relative mx-auto mt-8 w-full max-w-4xl">
+            <div className="overflow-hidden">
+              <div
+                className="flex items-stretch transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${reviewIdx * 50}%)` }}
+              >
+                {[...REVIEWS, REVIEWS[0]].map((r, idx) => {
+                  const realIdx = idx % REVIEWS.length
+                  const avatarSrc = realIdx === 0 ? avatarEmma : realIdx === 1 ? avatarJames : null
+                  const initials = r.name
+                    .replace('.', '')
+                    .split(' ')
+                    .filter(Boolean)
+                    .map((p) => p[0])
+                    .slice(0, 2)
+                    .join('')
+
+                  return (
+                    <div key={`${r.name}-${r.title}-${idx}`} className="flex w-1/2 shrink-0 px-2">
+                      <article className="flex h-full w-full min-h-[320px] flex-col rounded-3xl border-2 border-stone-900 bg-cream p-6 text-left shadow-[4px_4px_0_#000000] md:p-8">
+                        <p className="font-display text-3xl uppercase">{r.title}</p>
+                        <p className="mt-3 flex-1 text-base md:text-lg">{r.body}</p>
+                        <div className="mt-6 flex items-center gap-4">
+                          {avatarSrc ? (
+                            <img
+                              src={avatarSrc}
+                              alt={r.name}
+                              className="h-14 w-14 rounded-full border-2 border-stone-900 object-cover md:h-16 md:w-16"
+                            />
+                          ) : (
+                            <div className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-stone-900 bg-[#4bc7dc] font-display text-xl uppercase text-stone-900 md:h-16 md:w-16">
+                              {initials}
+                            </div>
+                          )}
+                          <div>
+                            <p className="font-bold">{r.name}</p>
+                            <p className="text-sm uppercase">{r.meta}</p>
+                          </div>
+                        </div>
+                      </article>
+                    </div>
+                  )
+                })}
               </div>
-            </article>
-            <article className="rounded-3xl border-2 border-stone-900 bg-cream p-6">
-              <p className="font-display text-3xl uppercase">Energy boost without the crash!</p>
-              <p className="mt-3">Zoooom gives me the perfect lift in the morning without relying on coffee.</p>
-              <div className="mt-5 flex items-center gap-4">
-                <img src={avatarJames} alt="James L." className="h-16 w-16 rounded-full object-cover" />
-                <div>
-                  <p className="font-bold">James L.</p>
-                  <p className="text-sm">fitness trainer & entrepreneur</p>
-                </div>
-              </div>
-            </article>
+            </div>
+
+            <button
+              type="button"
+              aria-label="Review anterior"
+              className="absolute left-0 top-1/2 z-10 grid h-12 w-12 -translate-x-[50px] -translate-y-1/2 place-items-center rounded-full border-2 border-stone-900 bg-[#4bc7dc] text-stone-900 shadow-[3px_3px_0_#000000] active:translate-y-[calc(-50%+2px)] active:shadow-[1px_1px_0_#000000]"
+              onClick={() => setReviewIdx((i) => (i - 1 + REVIEWS.length) % REVIEWS.length)}
+            >
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                <path d="M14.5 5 8 12l6.5 7" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              aria-label="Próximo review"
+              className="absolute right-0 top-1/2 z-10 grid h-12 w-12 translate-x-[50px] -translate-y-1/2 place-items-center rounded-full border-2 border-stone-900 bg-[#4bc7dc] text-stone-900 shadow-[3px_3px_0_#000000] active:translate-y-[calc(-50%+2px)] active:shadow-[1px_1px_0_#000000]"
+              onClick={() => setReviewIdx((i) => (i + 1) % REVIEWS.length)}
+            >
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                <path d="M9.5 5 16 12l-6.5 7" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            <div className="mt-4 font-display text-sm uppercase text-white">
+              {reviewIdx + 1}-{reviewIdx + 2 > REVIEWS.length ? 1 : reviewIdx + 2} / {REVIEWS.length}
+            </div>
           </div>
         </div>
       </section>
