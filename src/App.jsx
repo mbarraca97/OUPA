@@ -18,13 +18,22 @@ import avatarJames from './assets/images/Yb8nDxvwZAN07pPgqJS26suXipM.jpg'
 import gelado from './assets/images/Gelado Sem Fundo.png'
 import mmVermelho from './assets/images/M_M vermelho sem fundo.png'
 import oupaLogoWhite from './assets/images/oupa/logo_white.png'
+import logoBlack from './assets/images/oupa/logo-black.png'
+import logoRed from './assets/images/oupa/logo_red.png'
+import logoOrange from './assets/images/oupa/logo_orange.png'
+
 import oreo from './assets/images/oreo.png'
+import kinder from './assets/images/kinder.png'
 import oreos from './assets/images/oreos.png'
 import rightImg from './assets/images/right.png'
 import leftImg from './assets/images/left.png'
 import icon1 from './assets/images/svg/1.png'
 import icon2 from './assets/images/svg/2.png'
 import icon3 from './assets/images/svg/3.png'
+import cafecaixa from './assets/images/cafedesign.png'
+import cafe from './assets/images/cafe.png'
+import cafeg from './assets/images/cafegrao.png'
+import mms from './assets/images/M_Ms sem fundo.png'
 import Navbar from './components/Navbar'
 
 const products = [
@@ -40,6 +49,14 @@ const faq = [
   'Can kids drink Zoooom?',
   'How should I store Zoooom?',
   'Can I drink Zoooom every day?',
+]
+
+const FLAVOURS = [
+  { name: 'Café', image: cafeg },
+  { name: 'Oreo', image: oreo },
+  { name: "MM's", image: mms },
+  { name: 'Kinder', image: kinder },
+  { name: 'Pistachio', image: pist },
 ]
 
 const REVIEWS = [
@@ -241,29 +258,65 @@ export default function App() {
           </div>
       </section>
 
-      <section id="how" className="bg-lime-300 px-4 py-16 md:px-6">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="font-display text-5xl uppercase md:text-7xl">The incredible benefits of our kombucha</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-5">
-            {['Improved Digestion', 'Immunity', 'Boosting', 'Natural Source', 'of Probiotics'].map((b) => (
-              <div key={b} className="rounded-3xl border-2 border-stone-900 bg-cream p-4 text-center text-xl font-black uppercase">{b}</div>
-            ))}
-          </div>
-          <div className="mt-12 grid items-center gap-8 md:grid-cols-2">
-            <div>
-              <h3 className="font-display text-4xl uppercase">Only natural ingredients</h3>
-              <p className="mt-3">Our kombucha has a simple and healthy ingredients: Organic tea.</p>
-              <p className="mt-3 text-sm font-semibold uppercase">Please note! Sugar added to the drink undergoes a fermentation process and is completely absorbed by healthy bacteria.</p>
+      <section id="how" className="bg-[#f6ede4] py-24 md:py-32 overflow-hidden relative min-h-[600px] md:min-h-[800px]">
+        <div className="mx-auto  px-4 md:pl-[150px]">
+          <div className="flex flex-col md:flex-row">
+            {/* Left section - 70% */}
+            <div className="w-full md:w-[70%]">
+              <h2 className="font-display text-5xl uppercase md:text-7xl">Os nossos<span className="text-[#ff4035]"> sabores</span></h2>
+              <p className="mt-4 text-lg md:text-xl">Gelados sem trocas nem baldrocas. 100% artesanais, com produção própria e um segredo especial</p>
+              
+              <div className="mt-8 w-full">
+                <div className="grid grid-cols-3 gap-4 md:gap-[200px] max-w-[700px]">
+                  {/* First row - 3 cards */}
+                  {FLAVOURS.slice(0, 3).map((flavour) => (
+                    <div
+                      key={flavour.name}
+                      className="w-60 h-60 rounded-3xl border-2 border-black p-6 md:p-8 flex flex-col mx-auto bg-yellow-300"
+                    >
+                      <img
+                        src={flavour.image}
+                        alt={flavour.name}
+                        className="h-40 w-full object-contain"
+                      />
+                      <p className="mt-auto text-center font-display text-xl md:text-2xl font-bold uppercase">{flavour.name}</p>
+                    </div>
+                  ))}
+                  {/* Second row - 2 cards, centered */}
+                  <div className="col-span-3 flex justify-center gap-6 mt-[-150px]">
+                    {FLAVOURS.slice(3, 5).map((flavour) => (
+                      <div
+                        key={flavour.name}
+                        className="w-60 h-60 rounded-3xl border-2 border-black p-6 md:p-8 flex flex-col bg-yellow-300"
+                      >
+                        <img
+                          src={flavour.image}
+                          alt={flavour.name}
+                          className="h-40 w-full object-contain"
+                        />
+                        <p className="mt-auto text-center font-display text-xl md:text-2xl font-bold uppercase">{flavour.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="relative mx-auto h-80 w-full max-w-md">
-              <img src={kiwi} alt="Kiwi" className="absolute left-0 top-12 w-28" />
-              <img src={berries} alt="Berries" className="absolute right-0 top-0 w-36" />
-              <img src={orange} alt="Orange" className="absolute bottom-8 left-12 w-40" />
-              <img src={lemonSlice} alt="Lemon" className="absolute bottom-0 right-12 w-24" />
+            
+            {/* Right section - 30% with image */}
+            <div className="w-full md:w-[100%] mt-8 md:mt-0 relative mr-[-60px]">
+              <img
+                src={cafecaixa}
+                alt=""
+                className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 h-full w-auto object-contain max-h-[900px]"
+              />
+              <img
+                src={cafecaixa}
+                alt=""
+                className="block md:hidden w-full h-auto object-cover"
+              />
             </div>
           </div>
         </div>
-    
       </section>
 
       <section className="bg-pink-300  py-16 text-cream px-24">
@@ -446,32 +499,84 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
         </div>
       </section>
 
-      <section id="contact" className="bg-indigo-700 px-4 py-16 text-cream md:px-6">
+      <section id="contact" className="bg-[#ff6700] px-4 py-32 text-cream md:px-16">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="font-display text-5xl uppercase">Try zoooom</h2>
-          <p className="mt-2 text-2xl uppercase">Sign up now and get a bonus: <span className="text-lime-300">10% off</span> your next order!</p>
-          <form className="mx-auto mt-8 grid max-w-2xl gap-3 md:grid-cols-3">
-            <input className="rounded-full border-2 border-stone-900 px-4 py-3 text-stone-900" placeholder="Jane Doe" />
-            <input className="rounded-full border-2 border-stone-900 px-4 py-3 text-stone-900" placeholder="Your Phone" />
-            <input className="rounded-full border-2 border-stone-900 px-4 py-3 text-stone-900" placeholder="Your Email" />
-            <button className="rounded-full bg-lime-300 px-6 py-3 font-black uppercase text-stone-900 md:col-span-3">Sign up now</button>
+          <h2 className="font-display text-5xl uppercase md:text-[100px]">
+            Experimenta <br/><span className="text-yellow-300">OUPAAAAA</span>
+          </h2>
+          <form className="mx-auto mt-8 grid max-w-2xl gap-4">
+            <input 
+              className="rounded-full border-2 border-stone-900 px-4 py-3 text-stone-900 bg-white shadow-[3px_3px_0_#000000]" 
+              placeholder="Nome" 
+              type="text"
+            />
+            <input 
+              className="rounded-full border-2 border-stone-900 px-4 py-3 text-stone-900 bg-white shadow-[3px_3px_0_#000000]" 
+              placeholder="Email" 
+              type="email"
+            />
+            <textarea 
+              className="rounded-3xl border-2 border-stone-900 px-4 py-3 text-stone-900 bg-white shadow-[3px_3px_0_#000000] min-h-[120px] resize-none" 
+              placeholder="Mensagem"
+            />
+            <button className="rounded-full border-2 border-stone-900 bg-lime-300 px-6 py-3 font-black uppercase text-stone-900 shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000]">
+              Submeter
+            </button>
           </form>
         </div>
       </section>
 
-      <footer className="border-t-2 border-stone-900 bg-pink-300 px-4 py-10 md:px-6">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 md:flex-row">
-          <a href="#" className="font-display text-4xl">zoooom</a>
-          <div className="flex flex-wrap justify-center gap-4 text-xs font-bold uppercase">
-            <a href="#about">ABOUT</a>
-            <a href="#how">HOW IT WORKS</a>
-            <a href="#products">PRODUCTS</a>
-            <a href="#reviews">REVIEWS</a>
-            <a href="#faq">FAQ</a>
+      <section className="bg-[#ff6700] px-4 pb-10 pt-10 md:px-24 ">
+        <footer className="bg-yellow-300 border-2 border-stone-900 mx-auto px-4 py-10 md:px-6 rounded-3xl shadow-[3px_3px_0_#000000]">
+          <div className="mx-auto flex flex-col items-start justify-between gap-8 md:flex-row justify-between">
+            {/* Left: Icon */}
+            <div className="flex-shrink-0 items-center w-[30%] text-center justify-center">
+              <img src={logoOrange} alt="Oupa" className="w-32 md:w-[300px]" />
+            </div>
+
+            {/* Center: Vertical Menu */}
+            <div className="flex flex-col gap-3 text-lg font-display uppercase w-[30%]  text-center">
+              <a href="#products" className="text-stone-900 hover:underline">Produtos</a>
+              <a href="#about" className="text-stone-900 hover:underline">Sobre Nós</a>
+              <a href="#how" className="text-stone-900 hover:underline">Parcerias</a>
+              <a href="#reviews" className="text-stone-900 hover:underline">Reviews</a>
+              <a href="#contact" className="text-stone-900 hover:underline">Contacto</a>
+            </div>
+
+            {/* Right: Social Media */}
+            <div className="flex flex-col gap-3 w-[30%] text-center">
+              <p className="text-lg font-display uppercase text-stone-900">Segue-nos nas redes sociais</p>
+              <div className="flex gap-4 text-center justify-center">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-stone-900 hover:underline font-display uppercase"
+                >
+                  Facebook
+                </a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-stone-900 hover:underline font-display uppercase"
+                >
+                  Instagram
+                </a>
+              </div>
+            </div>
           </div>
-          <p className="text-xs">By Roman&apos;s design</p>
-        </div>
-      </footer>
+        </footer>
+
+        {/* Bottom Box as separate section */}
+        <section className="bg-yellow-300 border-2 border-stone-900 rounded-3xl mx-auto mt-5 py-6 shadow-[3px_3px_0_#000000]">
+          <div className="flex flex-col items-center justify-between gap-4 px-4 text-xs font-display uppercase text-stone-900 md:flex-row md:gap-6">
+            <a href="#" className="hover:underline">Terms of Service</a>
+            <a href="#" className="hover:underline">Privacy Policy</a>
+            <p>Developed by Sacra Studio</p>
+          </div>
+        </section>
+      </section>
     </main>
   )
 }
