@@ -186,16 +186,16 @@ export default function App() {
           src={gelado}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute -right-24 -top-24 w-[22rem] rotate-[-45deg] opacity-95 md:-right-[30rem] md:-top-[40rem] md:w-[70rem] "
+          className="pointer-events-none absolute -right-28 top-[-250px] w-[36rem] rotate-[-45deg] opacity-95 md:-right-[30rem] md:-top-[40rem] md:w-[70rem]"
         />
 
         <div className="mx-auto max-w-6xl">
-          <div className="relative flex w-full flex-col items-center justify-center gap-8 pt-[100px]">
+          <div className="relative flex w-full flex-col items-center justify-center gap-8 pt-6 md:pt-[100px]">
             {/* Center-left floating image (absolute on desktop so it doesn't affect centering) */}
             <img
               src={oreo}
               alt="oreo"
-              className="w-44 animate-float-slow select-none md:hidden"
+              className="absolute -left-10 top-0 w-36 animate-float-slow select-none md:hidden"
               draggable="false"
             />
             <img
@@ -209,8 +209,8 @@ export default function App() {
             <div className="mx-auto text-center">
               {/* Main logo replaces H1 */}
               <h1
-                className="font-display text-7xl md:text-[220px] uppercase text-white leading-none"
-              > OUPAAAAA</h1>
+                className="font-display text-[160px] md:text-[220px] uppercase text-white leading-none"
+              > OUPA<br/>AAAA</h1>
 
               {/* Paragraph under logo (Londrina) */}
               <p className="mt-6 font-display text-3xl uppercase text-stone-900 md:mt-12 md:text-[60px] md:leading-tight text-[#ff4035]">
@@ -230,8 +230,8 @@ export default function App() {
               src={mmVermelho}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute right-[-12rem] top-1/2 hidden w-[600px] animate-float-slow select-none md:block"
-              draggable="true"
+              className="pointer-events-none absolute right-[-4rem] bottom-[6rem] w-[180px] animate-float-slow select-none md:right-[-12rem] md:bottom-auto md:top-1/2 md:w-[600px]"
+              draggable="false"
             />
             </div>
           </div>
@@ -253,9 +253,7 @@ export default function App() {
               </article>
             ))}
           </div>
-          <div className="mt-8 text-center">
-            <button className="view-all">VIEW ALL PRODUCTS</button>
-          </div>
+       
         </div>
       </section>
 
