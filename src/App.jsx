@@ -1,4 +1,16 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, lazy, Suspense } from 'react'
+import L from 'leaflet'
+
+// Fix for default marker icons in React Leaflet
+delete L.Icon.Default.prototype._getIconUrl
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+})
+
+// Lazy load the map component to avoid StrictMode double initialization issues
+const LocationMap = lazy(() => import('./components/LocationMap'))
 import copoShot from './assets/images/coposhot.png'
 import caixafechada from './assets/images/caixafechada.png'
 import pist from './assets/images/pist2.png'
@@ -43,12 +55,30 @@ const products = [
 ]
 
 const faq = [
-  'What makes Zoooom special?',
-  'Is there caffeine in Zoooom?',
-  'How much sugar is in Zoooom?',
-  'Can kids drink Zoooom?',
-  'How should I store Zoooom?',
-  'Can I drink Zoooom every day?',
+  {
+    question: 'O que torna os gelados Oupa especiais?',
+    answer: 'Todos os nossos gelados são 100% artesanais e caseiros, feitos com ingredientes de qualidade e muito carinho. Não usamos conservantes artificiais e cada sabor é cuidadosamente desenvolvido para garantir a melhor experiência possível.'
+  },
+  {
+    question: 'Como posso encomendar gelados Oupa?',
+    answer: 'Podes encomendar diretamente para consumo privado ou contactar-nos para estabelecer uma parceria se fores um restaurante. Também podes contratar a nossa carrinha para eventos especiais!'
+  },
+  {
+    question: 'Fazem eventos com a carrinha?',
+    answer: 'Sim! A nossa carrinha Oupa está disponível para eventos privados, festas, casamentos, eventos corporativos e festas populares. Contacta-nos para mais informações sobre disponibilidade e preços.'
+  },
+  {
+    question: 'Trabalham com restaurantes?',
+    answer: 'Sim, estabelecemos parcerias com restaurantes que queiram oferecer os nossos gelados artesanais aos seus clientes. Se tens um restaurante e estás interessado, entra em contacto connosco!'
+  },
+  {
+    question: 'Como devo conservar os gelados?',
+    answer: 'Os nossos gelados devem ser mantidos no congelador a -18°C. Para melhor qualidade, recomendamos consumir dentro de 3 meses após a compra. Nunca recongeles gelados que já tenham sido descongelados.'
+  },
+  {
+    question: 'Os gelados são adequados para crianças?',
+    answer: 'Sim! Os nossos gelados são feitos com ingredientes naturais e são adequados para toda a família, incluindo crianças. No entanto, alguns sabores podem conter alergénios - consulta sempre os ingredientes antes de consumir.'
+  },
 ]
 
 const FLAVOURS = [
@@ -469,32 +499,137 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
         </div>
       </section>
 
-      <section className="bg-indigo-800 px-4 py-16 text-cream md:px-6">
-        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
-          <article className="rounded-3xl border-2 border-cream p-6">
-            <h3 className="font-display text-4xl uppercase">In stores</h3>
-            <p className="mt-3">Find Zoooom at selected organic shops, cafes, and supermarkets near you.</p>
-          </article>
-          <article className="rounded-3xl border-2 border-cream p-6">
-            <h3 className="font-display text-4xl uppercase">Order online</h3>
-            <p className="mt-3">Shop our full range and enjoy fresh kombucha whenever you want.</p>
-            <button className="mt-4 rounded-full bg-lime-300 px-5 py-2 text-sm font-bold text-stone-900">Order Now</button>
-          </article>
+      <section id="partnerships" className="relative overflow-hidden bg-[#ff6700] px-4 py-24 md:px-6 md:py-32">
+        {/* Floating decorative elements */}
+        <img
+          src={oreo}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute left-[-3rem] top-20 hidden w-32 animate-float-slow select-none md:block"
+          draggable="false"
+        />
+        <img
+          src={mmVermelho}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute right-[-2rem] top-1/2 -translate-y-1/2 hidden w-40 animate-float-slow select-none md:block"
+          draggable="false"
+        />
+        <img
+          src={cafeg}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/4 bottom-10 hidden w-28 animate-float-slow select-none md:block"
+          draggable="false"
+        />
+
+        <div className="mx-auto max-w-6xl relative z-10">
+          <h2 className="font-display text-5xl uppercase md:text-[100px] text-center text-white mb-4">
+            Parcerias com <span className="text-yellow-300">Restaurantes</span>
+          </h2>
+          <p className="font-display text-xl md:text-2xl text-center text-white mb-12 max-w-4xl mx-auto">
+            Junta-te à família Oupa e oferece aos teus clientes gelados artesanais de qualidade
+          </p>
+
+          <div className="grid gap-6 md:grid-cols-2 mt-16">
+            {/* Left Card */}
+            <article className="rounded-3xl border-2 border-stone-900 bg-yellow-300 p-8 shadow-[4px_4px_0_#000000]">
+              <h3 className="font-display text-4xl uppercase md:text-5xl text-stone-900 mb-4">
+                Preços Atrativos
+              </h3>
+              <p className="font-display text-lg md:text-xl text-stone-900 mb-6">
+                Oferecemos condições especiais para restaurantes parceiros. Preços competitivos que te permitem ter uma excelente margem de lucro enquanto ofereces qualidade premium aos teus clientes.
+              </p>
+              <p className="font-display text-lg md:text-xl text-stone-900">
+                Todos os restaurantes que trabalham connosco reportam uma sensação de vendas positiva e clientes satisfeitos que voltam para mais.
+              </p>
+            </article>
+
+            {/* Right Card */}
+            <article className="rounded-3xl border-2 border-stone-900 bg-white p-8 shadow-[4px_4px_0_#000000]">
+              <h3 className="font-display text-4xl uppercase md:text-5xl text-stone-900 mb-4">
+                Vantagens da Parceria
+              </h3>
+              <ul className="space-y-4 font-display text-lg md:text-xl text-stone-900">
+                <li className="flex items-start gap-3">
+                  <span className="text-yellow-300 font-black">•</span>
+                  <span>Gelados 100% artesanais e de qualidade premium</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-yellow-300 font-black">•</span>
+                  <span>Preços atrativos com excelente margem de lucro</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-yellow-300 font-black">•</span>
+                  <span>Diferenciação no teu restaurante com produtos únicos</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-yellow-300 font-black">•</span>
+                  <span>Aumento de satisfação e fidelização dos clientes</span>
+                </li>
+              </ul>
+              <button className="mt-8 rounded-full border-2 border-stone-900 bg-lime-300 px-8 py-4 font-display text-xl font-black uppercase text-stone-900 shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000]">
+                Quero ser Parceiro
+              </button>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section id="faq" className="px-4 py-16 md:px-6">
+      <section id="faq" className="px-4 py-16 md:px-6 bg-pink-300">
         <div className="mx-auto max-w-6xl">
-          <h2 className="font-display text-5xl uppercase md:text-6xl">You ask, we answer!</h2>
-          <div className="mt-8 space-y-4">
-            {faq.map((q, idx) => (
-              <details key={q} className="rounded-2xl border-2 border-stone-900 bg-cream p-4" open={idx === 2}>
-                <summary className="cursor-pointer list-none font-bold uppercase">{q}</summary>
-                {idx === 2 && (
-                  <p className="mt-3 text-sm">Most of the sugar added during brewing is consumed by healthy bacteria in the fermentation process. The final product has just a touch of natural sweetness.</p>
-                )}
+          <h2 className="font-display text-[100px] uppercase text-center ">Vocês perguntam<br/> <span className="text-white mt-[-150px] bg-black px-4 py-2 rounded-3xl">Nós respondemos <br/> </span> </h2>
+          <div className="mt-8 space-y-4 flex flex-col items-center justify-center ">
+            {faq.map((item, idx) => (
+              <details key={item.question} className="rounded-[60px] border-2 border-stone-900 bg-cream p-6 w-[800px] text-center nb-navbar__link text-2xl" open={idx === 2}>
+                <summary className="cursor-pointer list-none uppercase">{item.question}</summary>
+                <p className="mt-3 text-lg">{item.answer}</p>
               </details>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="locations" className="bg-[#662d91] px-4 py-16 md:px-6">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="font-display text-5xl uppercase md:text-[100px] text-center text-white mb-8">
+            Onde nos <span className="text-yellow-300">encontrar</span>
+          </h2>
+          <div className="flex flex-col md:flex-row gap-5">
+            {/* Map - 40% width */}
+            <div className="flex flex-col md:flex-col gap-5 w-full md:w-[50%] ">
+
+            <h2 className="font-display text-lg uppercase md:text-[40px] text-center text-white">
+            <span className="text-yellow-300">Em Restaurantes</span>
+          </h2>
+            <div className="rounded-3xl border-2 border-stone-900 shadow-[3px_3px_0_#000000] overflow-hidden bg-white">
+              <Suspense fallback={<div style={{ height: '500px', width: '100%', backgroundColor: '#f0f0f0' }} />}>
+                <LocationMap />
+              </Suspense>
+            </div>
+            </div>
+            
+            {/* Text and Button Box - 60% width */}
+            <div className="flex flex-col md:flex-col gap-5 w-full md:w-[50%] ">
+
+            <h2 className="font-display text-lg uppercase md:text-[40px] text-center text-white">
+            <span className="text-yellow-300">Em Sua casa</span>
+          </h2>
+            <div className=" rounded-3xl border-2  border-stone-900 shadow-[3px_3px_0_#000000] bg-yellow-300 p-8 md:p-12 flex flex-col justify-center">
+              <h3 className="font-display text-4xl uppercase md:text-6xl text-stone-900 mb-6 ">
+                Encomenda Online
+              </h3>
+              <p className="font-display text-lg md:text-xl text-stone-900 mb-8">
+                Queres saborear os nossos gelados artesanais no conforto da tua casa? Faz a tua encomenda online e recebe gelados frescos e deliciosos diretamente à tua porta!
+              </p>
+              <p className="font-display text-lg md:text-xl text-stone-900 mb-8">
+                Escolhe entre os nossos sabores artesanais e nós entregamos tudo fresquinho. Perfeito para momentos especiais em família ou para surpreender alguém especial.
+              </p>
+              <button className="rounded-full border-2 border-stone-900 bg-[#662d91] px-8 py-4 font-display text-xl font-white uppercase text-white shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000] w-fit">
+                Contacta-nos
+              </button>
+            </div>
+            </div>
           </div>
         </div>
       </section>
@@ -531,7 +666,7 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
           <div className="mx-auto flex flex-col items-start justify-between gap-8 md:flex-row justify-between">
             {/* Left: Icon */}
             <div className="flex-shrink-0 items-center w-[30%] text-center justify-center">
-              <img src={logoOrange} alt="Oupa" className="w-32 md:w-[300px]" />
+              <img src={logoRed} alt="Oupa" className="w-32 md:w-[300px]" />
             </div>
 
             {/* Center: Vertical Menu */}
