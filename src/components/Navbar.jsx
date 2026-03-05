@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-30 px-4 pt-4 md:px-6">
-      <div className="nb-navbar mx-auto max-w-6xl px-4 py-3 md:px-6 md:py-4">
+      <div className={`nb-navbar mx-auto max-w-6xl px-4 py-3 md:px-6 md:py-4${open ? ' nb-navbar--open' : ''}`}>
         <div className="flex items-center justify-between gap-4">
   
           <img

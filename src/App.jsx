@@ -125,6 +125,15 @@ const REVIEWS = [
 export default function App() {
   const aboutZoomImgRef = useRef(null)
   const [reviewIdx, setReviewIdx] = useState(0)
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  )
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
   useEffect(() => {
     const el = aboutZoomImgRef.current
@@ -171,7 +180,7 @@ export default function App() {
     <main className="bg-[#4bc7dc] text-stone-900">
       <Navbar />
 
-      <section className="relative overflow-hidden px-4 pb-16 pt-[150px] md:px-6 md:pb-24 md:mt-[-150px]">
+      <section className="relative overflow-hidden px-[30px] pb-16 pt-[150px] md:px-6 md:pb-24 md:mt-[-150px]">
         {/* Top-right corner accent (rotated + partially out of frame) */}
         <img
           src={gelado}
@@ -200,17 +209,17 @@ export default function App() {
             <div className="mx-auto text-center">
               {/* Main logo replaces H1 */}
               <h1
-                className="font-display text-[220px] uppercase text-white leading-none"
+                className="font-display text-7xl md:text-[220px] uppercase text-white leading-none"
               > OUPAAAAA</h1>
 
               {/* Paragraph under logo (Londrina) */}
-              <p className="mt-12 font-display text-xl  uppercase text-stone-900 md:text-[60px] text-[#ff4035]">
+              <p className="mt-6 font-display text-3xl uppercase text-stone-900 md:mt-12 md:text-[60px] md:leading-tight text-[#ff4035]">
                Vai um gelado?
               </p>
 
               {/* Button row + floating image to the right */}
-              <div className="mt-16 flex flex-col items-center justify-center gap-5 sm:flex-row sm:justify-center pt-16">
-                <button className="rounded-full border-2 border-white bg-yellow-300 px-8 py-3 font-display text-[30px] font-[300] uppercase text-white shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000]">
+              <div className="mt-8 md:mt-16 flex flex-col items-center justify-center gap-5 sm:flex-row sm:justify-center pt-8 md:pt-16">
+                <button className="rounded-full border-2 border-white bg-yellow-300 px-6 py-2 md:px-8 md:py-3 font-display text-xl md:text-[30px] font-[300] uppercase text-white shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000]">
                   Saber Mais
                 </button>
 
@@ -229,9 +238,9 @@ export default function App() {
         </div>
       </section>
 
-      <section id="products" className="bg-[#ff6700] px-16 py-24 text-cream md:px-6">
+      <section id="products" className="bg-[#ff6700] px-[30px] py-16 text-cream md:px-16 md:py-24">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-center font-display text-5xl uppercase md:text-[100px]"> Produtos <span className="text-lime-300">Populares</span></h2>
+          <h2 className="text-center font-display text-4xl uppercase md:text-[100px] md:leading-tight"> Produtos <span className="text-lime-300">Populares</span></h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {products.map((item) => (
               <article
@@ -250,9 +259,9 @@ export default function App() {
         </div>
       </section>
 
-      <section id="about" className="px-4 py-16 md:px-6 bg-[#ff6700]">
+      <section id="about" className="px-[30px] py-16 md:px-6 bg-[#ff6700]">
         <div className="mx-auto max-w-6xl">
-          <h3 className="font-display text-6xl uppercase md:text-[68px] text-center text-white">a <span className="text-yellow-200">oupa</span> é uma marca de gelados artesanais que te vai fazer comer e chorar por mais.</h3>
+          <h3 className="font-display text-3xl uppercase md:text-[68px] md:leading-tight text-center text-white">a <span className="text-yellow-200">oupa</span> é uma marca de gelados artesanais que te vai fazer comer e chorar por mais.</h3>
           <div className="relative mt-10 flex items-center justify-center">
             {/* Left floating image (on top) */}
             <img
@@ -282,49 +291,47 @@ export default function App() {
             />
           </div>
         </div>
-        <h3 className="font-display text-6xl uppercase md:text-[68px] text-center text-white">a <span className="text-yellow-200">oupa</span> é uma marca de gelados artesanais que te vai fazer comer e chorar por mais.</h3>
+        <h3 className="font-display text-3xl uppercase md:text-[68px] md:leading-tight text-center text-white">a <span className="text-yellow-200">oupa</span> é uma marca de gelados artesanais que te vai fazer comer e chorar por mais.</h3>
         <div className="mt-8 text-center">
             <button className="view-all">saber mais</button>
           </div>
       </section>
 
-      <section id="how" className="bg-[#f6ede4] py-24 md:py-32 overflow-hidden relative min-h-[600px] md:min-h-[800px]">
-        <div className="mx-auto  px-4 md:pl-[150px]">
+      <section id="how" className="bg-[#f6ede4] py-16 md:py-32 overflow-hidden relative min-h-[600px] md:min-h-[800px]">
+        <div className="mx-auto px-[30px] md:pl-[150px]">
           <div className="flex flex-col md:flex-row">
             {/* Left section - 70% */}
             <div className="w-full md:w-[70%]">
-              <h2 className="font-display text-5xl uppercase md:text-7xl">Os nossos<span className="text-[#ff4035]"> sabores</span></h2>
-              <p className="mt-4 text-lg md:text-xl">Gelados sem trocas nem baldrocas. 100% artesanais, com produção própria e um segredo especial</p>
+              <h2 className="font-display text-4xl uppercase md:text-7xl">Os nossos<span className="text-[#ff4035]"> sabores</span></h2>
+              <p className="mt-4 text-base md:text-xl">Gelados sem trocas nem baldrocas. 100% artesanais, com produção própria e um segredo especial</p>
               
               <div className="mt-8 w-full">
-                <div className="grid grid-cols-3 gap-4 md:gap-[200px] max-w-[700px]">
-                  {/* First row - 3 cards */}
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-[200px] md:max-w-[700px]">
                   {FLAVOURS.slice(0, 3).map((flavour) => (
                     <div
                       key={flavour.name}
-                      className="w-60 h-60 rounded-3xl border-2 border-black p-6 md:p-8 flex flex-col mx-auto bg-yellow-300"
+                      className="h-40 w-full md:w-60 md:h-60 rounded-3xl border-2 border-black p-4 md:p-8 flex flex-col mx-auto bg-yellow-300"
                     >
                       <img
                         src={flavour.image}
                         alt={flavour.name}
-                        className="h-40 w-full object-contain"
+                        className="h-20 md:h-40 w-full object-contain"
                       />
-                      <p className="mt-auto text-center font-display text-xl md:text-2xl font-bold uppercase">{flavour.name}</p>
+                      <p className="mt-auto text-center font-display text-base md:text-2xl font-bold uppercase">{flavour.name}</p>
                     </div>
                   ))}
-                  {/* Second row - 2 cards, centered */}
-                  <div className="col-span-3 flex justify-center gap-6 mt-[-150px]">
+                  <div className="col-span-2 flex justify-center gap-4 md:col-span-3 md:gap-6 md:mt-[-150px]">
                     {FLAVOURS.slice(3, 5).map((flavour) => (
                       <div
                         key={flavour.name}
-                        className="w-60 h-60 rounded-3xl border-2 border-black p-6 md:p-8 flex flex-col bg-yellow-300"
+                        className="h-40 w-full max-w-[calc(50%-8px)] md:w-60 md:h-60 md:max-w-none rounded-3xl border-2 border-black p-4 md:p-8 flex flex-col bg-yellow-300"
                       >
                         <img
                           src={flavour.image}
                           alt={flavour.name}
-                          className="h-40 w-full object-contain"
+                          className="h-20 md:h-40 w-full object-contain"
                         />
-                        <p className="mt-auto text-center font-display text-xl md:text-2xl font-bold uppercase">{flavour.name}</p>
+                        <p className="mt-auto text-center font-display text-base md:text-2xl font-bold uppercase">{flavour.name}</p>
                       </div>
                     ))}
                   </div>
@@ -349,12 +356,12 @@ export default function App() {
         </div>
       </section>
 
-      <section className="bg-pink-300  py-16 text-cream px-24">
+      <section className="bg-pink-300 py-16 text-cream px-[30px] md:px-24">
         <div className="mx-auto ">
           <div className="flex flex-col items-center gap-10 md:flex-row md:items-start">
             {/* Left (60%) */}
             <div className="w-full md:w-3/5">
-              <h2 className="font-display text-5xl uppercase md:text-[100px] text-black">
+              <h2 className="font-display text-4xl uppercase md:text-[100px] md:leading-tight text-black">
                 Conheça a nossa <span className="text-lime-300">Oupa</span> truck!
               </h2>
 
@@ -365,14 +372,14 @@ export default function App() {
                     src={leftImg}
                     alt=""
                     aria-hidden="true"
-                    className="w-full max-w-none select-none mt-[-100px] ml-[-40px]"
+                    className="w-full max-w-none select-none md:mt-[-100px] md:ml-[-40px]"
                     draggable="false"
                   />
                 </div>
 
                 {/* Right inner: text + icon boxes */}
                 <div className="md:w-1/2">
-                  <p className="font-display text-xl font-[300] uppercase md:text-3xl mt-[100px] text-black">
+                  <p className="font-display text-base font-[300] uppercase md:text-3xl mt-8 md:mt-[100px] text-black">
 Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces, sem muita letra!                  </p>
 
                   <div className="mt-6 grid grid-cols-3 gap-3">
@@ -410,7 +417,7 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
                 src={rightImg}
                 alt=""
                 aria-hidden="true"
-                className="mx-auto w-full max-w-none select-none mr-[-100px]"
+                className="mx-auto w-full max-w-none select-none md:mr-[-100px]"
                 draggable="false"
               />
             </div>
@@ -418,17 +425,17 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
         </div>
       </section>
 
-      <section id="reviews" className="px-4 pb-16 md:px-6 bg-[#ff4035]">
+      <section id="reviews" className="px-[30px] pb-16 md:px-6 bg-[#ff4035]">
         <div className="mx-auto max-w-6xl text-center">
           <div>
-          <h2 className="font-display text-5xl uppercase md:text-6xl text-white pt-16">O que dizem</h2>
-          <h2 className="font-display text-5xl uppercase md:text-[100px] text-white pb-16"> sobre a <span className="text-[#4bc7dc]">oupaaaaa</span></h2>
+          <h2 className="font-display text-3xl uppercase md:text-6xl md:leading-tight text-white pt-16">O que dizem</h2>
+          <h2 className="font-display text-4xl uppercase md:text-[100px] md:leading-tight text-white pb-8 md:pb-16"> sobre a <span className="text-[#4bc7dc]">oupaaaaa</span></h2>
           </div>
           <div className="relative mx-auto mt-8 w-full max-w-4xl">
             <div className="overflow-hidden">
               <div
                 className="flex items-stretch transition-transform duration-500 ease-out"
-                style={{ transform: `translateX(-${reviewIdx * 50}%)` }}
+                style={{ transform: `translateX(-${reviewIdx * (isMobile ? 100 : 50)}%)` }}
               >
                 {[...REVIEWS, REVIEWS[0]].map((r, idx) => {
                   const realIdx = idx % REVIEWS.length
@@ -442,10 +449,10 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
                     .join('')
 
                   return (
-                    <div key={`${r.name}-${r.title}-${idx}`} className="flex w-1/2 shrink-0 px-2">
-                      <article className="flex h-full w-full min-h-[320px] flex-col rounded-3xl border-2 border-stone-900 bg-cream p-6 text-left shadow-[4px_4px_0_#000000] md:p-8">
-                        <p className="font-display text-3xl uppercase">{r.title}</p>
-                        <p className="mt-3 flex-1 text-base md:text-lg">{r.body}</p>
+                    <div key={`${r.name}-${r.title}-${idx}`} className="flex w-full md:w-1/2 shrink-0 px-2">
+                      <article className="flex h-full w-full min-h-[280px] md:min-h-[320px] flex-col rounded-3xl border-2 border-stone-900 bg-cream p-6 text-left shadow-[4px_4px_0_#000000] md:p-8">
+                        <p className="font-display text-2xl md:text-3xl uppercase">{r.title}</p>
+                        <p className="mt-3 flex-1 text-sm md:text-lg">{r.body}</p>
                         <div className="mt-6 flex items-center gap-4">
                           {avatarSrc ? (
                             <img
@@ -473,7 +480,7 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
             <button
               type="button"
               aria-label="Review anterior"
-              className="absolute left-0 top-1/2 z-10 grid h-12 w-12 -translate-x-[50px] -translate-y-1/2 place-items-center rounded-full border-2 border-stone-900 bg-[#4bc7dc] text-stone-900 shadow-[3px_3px_0_#000000] active:translate-y-[calc(-50%+2px)] active:shadow-[1px_1px_0_#000000]"
+              className="absolute left-0 top-1/2 z-10 grid h-10 w-10 md:h-12 md:w-12 -translate-x-2 md:-translate-x-[50px] -translate-y-1/2 place-items-center rounded-full border-2 border-stone-900 bg-[#4bc7dc] text-stone-900 shadow-[3px_3px_0_#000000] active:translate-y-[calc(-50%+2px)] active:shadow-[1px_1px_0_#000000]"
               onClick={() => setReviewIdx((i) => (i - 1 + REVIEWS.length) % REVIEWS.length)}
             >
               <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
@@ -484,7 +491,7 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
             <button
               type="button"
               aria-label="Próximo review"
-              className="absolute right-0 top-1/2 z-10 grid h-12 w-12 translate-x-[50px] -translate-y-1/2 place-items-center rounded-full border-2 border-stone-900 bg-[#4bc7dc] text-stone-900 shadow-[3px_3px_0_#000000] active:translate-y-[calc(-50%+2px)] active:shadow-[1px_1px_0_#000000]"
+              className="absolute right-0 top-1/2 z-10 grid h-10 w-10 md:h-12 md:w-12 translate-x-2 md:translate-x-[50px] -translate-y-1/2 place-items-center rounded-full border-2 border-stone-900 bg-[#4bc7dc] text-stone-900 shadow-[3px_3px_0_#000000] active:translate-y-[calc(-50%+2px)] active:shadow-[1px_1px_0_#000000]"
               onClick={() => setReviewIdx((i) => (i + 1) % REVIEWS.length)}
             >
               <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
@@ -493,64 +500,73 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
             </button>
 
             <div className="mt-4 font-display text-sm uppercase text-white">
-              {reviewIdx + 1}-{reviewIdx + 2 > REVIEWS.length ? 1 : reviewIdx + 2} / {REVIEWS.length}
+              {isMobile
+                ? `${reviewIdx + 1} / ${REVIEWS.length}`
+                : `${reviewIdx + 1}-${reviewIdx + 2 > REVIEWS.length ? 1 : reviewIdx + 2} / ${REVIEWS.length}`}
             </div>
           </div>
         </div>
       </section>
 
-      <section id="partnerships" className="relative overflow-hidden bg-[#ff6700] px-4 py-24 md:px-6 md:py-32">
+      <section id="partnerships" className="relative overflow-hidden bg-[#ff6700] px-[30px] py-16 md:px-6 md:py-32">
         {/* Floating decorative elements */}
         <img
           src={oreo}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute left-[-3rem] top-20 hidden w-32 animate-float-slow select-none md:block"
+          className="pointer-events-none absolute left-[-3rem] top-20 hidden w-[200px] animate-float-slow select-none md:block"
           draggable="false"
         />
         <img
           src={mmVermelho}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute right-[-2rem] top-1/2 -translate-y-1/2 hidden w-40 animate-float-slow select-none md:block"
+          className="pointer-events-none absolute right-[-2rem] top-1/2 -translate-y-1/2 hidden w-[200px] animate-float-slow select-none md:block"
           draggable="false"
         />
         <img
           src={cafeg}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/4 bottom-10 hidden w-28 animate-float-slow select-none md:block"
+          className="pointer-events-none absolute left-1/4 bottom-10 hidden w-28 animate-float-slow select-none md:block w-[200px]"
+          draggable="false"
+        />
+          <img
+          src={cafeg}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/8 bottom-10 hidden animate-float-slow select-none md:block w-[200px]"
           draggable="false"
         />
 
         <div className="mx-auto max-w-6xl relative z-10">
-          <h2 className="font-display text-5xl uppercase md:text-[100px] text-center text-white mb-4">
+          <h2 className="font-display text-4xl uppercase md:text-[100px] md:leading-tight text-center text-white mb-4">
             Parcerias com <span className="text-yellow-300">Restaurantes</span>
           </h2>
-          <p className="font-display text-xl md:text-2xl text-center text-white mb-12 max-w-4xl mx-auto">
+          <p className="font-display text-base md:text-2xl text-center text-white mb-8 md:mb-12 max-w-4xl mx-auto">
             Junta-te à família Oupa e oferece aos teus clientes gelados artesanais de qualidade
           </p>
 
           <div className="grid gap-6 md:grid-cols-2 mt-16">
             {/* Left Card */}
             <article className="rounded-3xl border-2 border-stone-900 bg-yellow-300 p-8 shadow-[4px_4px_0_#000000]">
-              <h3 className="font-display text-4xl uppercase md:text-5xl text-stone-900 mb-4">
+              <h3 className="font-display text-2xl uppercase md:text-5xl md:leading-tight text-stone-900 mb-4">
                 Preços Atrativos
               </h3>
-              <p className="font-display text-lg md:text-xl text-stone-900 mb-6">
+              <p className="font-display text-base md:text-xl text-stone-900 mb-6">
                 Oferecemos condições especiais para restaurantes parceiros. Preços competitivos que te permitem ter uma excelente margem de lucro enquanto ofereces qualidade premium aos teus clientes.
               </p>
-              <p className="font-display text-lg md:text-xl text-stone-900">
+              <p className="font-display text-base md:text-xl text-stone-900">
                 Todos os restaurantes que trabalham connosco reportam uma sensação de vendas positiva e clientes satisfeitos que voltam para mais.
               </p>
             </article>
 
             {/* Right Card */}
             <article className="rounded-3xl border-2 border-stone-900 bg-white p-8 shadow-[4px_4px_0_#000000]">
-              <h3 className="font-display text-4xl uppercase md:text-5xl text-stone-900 mb-4">
+              <h3 className="font-display text-2xl uppercase md:text-5xl md:leading-tight text-stone-900 mb-4">
                 Vantagens da Parceria
               </h3>
-              <ul className="space-y-4 font-display text-lg md:text-xl text-stone-900">
+              <ul className="space-y-4 font-display text-base md:text-xl text-stone-900">
                 <li className="flex items-start gap-3">
                   <span className="text-yellow-300 font-black">•</span>
                   <span>Gelados 100% artesanais e de qualidade premium</span>
@@ -576,33 +592,33 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
         </div>
       </section>
 
-      <section id="faq" className="px-4 py-16 md:px-6 bg-pink-300">
+      <section id="faq" className="px-[30px] py-16 md:px-6 bg-pink-300">
         <div className="mx-auto max-w-6xl">
-          <h2 className="font-display text-[100px] uppercase text-center ">Vocês perguntam<br/> <span className="text-white mt-[-150px] bg-black px-4 py-2 rounded-3xl">Nós respondemos <br/> </span> </h2>
+          <h2 className="font-display text-4xl md:text-[100px] md:leading-tight uppercase text-center">Vocês perguntam<br/> <span className="text-white bg-black px-4 py-2 rounded-3xl">Nós respondemos</span></h2>
           <div className="mt-8 space-y-4 flex flex-col items-center justify-center ">
             {faq.map((item, idx) => (
-              <details key={item.question} className="rounded-[60px] border-2 border-stone-900 bg-cream p-6 w-[800px] text-center nb-navbar__link text-2xl" open={idx === 2}>
+              <details key={item.question} className="rounded-[30px] md:rounded-[60px] border-2 border-stone-900 bg-cream p-4 md:p-6 w-full md:w-[800px] text-center nb-navbar__link text-base md:text-2xl" open={idx === 2}>
                 <summary className="cursor-pointer list-none uppercase">{item.question}</summary>
-                <p className="mt-3 text-lg">{item.answer}</p>
+                <p className="mt-3 text-sm md:text-lg">{item.answer}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="locations" className="bg-[#662d91] px-4 py-16 md:px-6">
+      <section id="locations" className="bg-[#662d91] px-[30px] py-16 md:px-6">
         <div className="mx-auto max-w-6xl">
-          <h2 className="font-display text-5xl uppercase md:text-[100px] text-center text-white mb-8">
+          <h2 className="font-display text-4xl uppercase md:text-[100px] md:leading-tight text-center text-white mb-8">
             Onde nos <span className="text-yellow-300">encontrar</span>
           </h2>
           <div className="flex flex-col md:flex-row gap-5">
             {/* Map - 40% width */}
             <div className="flex flex-col md:flex-col gap-5 w-full md:w-[50%] ">
 
-            <h2 className="font-display text-lg uppercase md:text-[40px] text-center text-white">
+            <h2 className="font-display text-lg uppercase md:text-[40px] md:leading-tight text-center text-white">
             <span className="text-yellow-300">Em Restaurantes</span>
           </h2>
-            <div className="rounded-3xl border-2 border-stone-900 shadow-[3px_3px_0_#000000] overflow-hidden bg-white">
+            <div className="relative z-0 rounded-3xl border-2 border-stone-900 shadow-[3px_3px_0_#000000] overflow-hidden bg-white">
               <Suspense fallback={<div style={{ height: '500px', width: '100%', backgroundColor: '#f0f0f0' }} />}>
                 <LocationMap />
               </Suspense>
@@ -612,17 +628,17 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
             {/* Text and Button Box - 60% width */}
             <div className="flex flex-col md:flex-col gap-5 w-full md:w-[50%] ">
 
-            <h2 className="font-display text-lg uppercase md:text-[40px] text-center text-white">
+            <h2 className="font-display text-lg uppercase md:text-[40px] md:leading-tight text-center text-white">
             <span className="text-yellow-300">Em Sua casa</span>
           </h2>
             <div className=" rounded-3xl border-2  border-stone-900 shadow-[3px_3px_0_#000000] bg-yellow-300 p-8 md:p-12 flex flex-col justify-center">
-              <h3 className="font-display text-4xl uppercase md:text-6xl text-stone-900 mb-6 ">
+              <h3 className="font-display text-2xl uppercase md:text-6xl md:leading-tight text-stone-900 mb-4 md:mb-6">
                 Encomenda Online
               </h3>
-              <p className="font-display text-lg md:text-xl text-stone-900 mb-8">
+              <p className="font-display text-base md:text-xl text-stone-900 mb-4 md:mb-8">
                 Queres saborear os nossos gelados artesanais no conforto da tua casa? Faz a tua encomenda online e recebe gelados frescos e deliciosos diretamente à tua porta!
               </p>
-              <p className="font-display text-lg md:text-xl text-stone-900 mb-8">
+              <p className="font-display text-base md:text-xl text-stone-900 mb-4 md:mb-8">
                 Escolhe entre os nossos sabores artesanais e nós entregamos tudo fresquinho. Perfeito para momentos especiais em família ou para surpreender alguém especial.
               </p>
               <button className="rounded-full border-2 border-stone-900 bg-[#662d91] px-8 py-4 font-display text-xl font-white uppercase text-white shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000] w-fit">
@@ -634,9 +650,9 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
         </div>
       </section>
 
-      <section id="contact" className="bg-[#ff6700] px-4 py-32 text-cream md:px-16">
+      <section id="contact" className="bg-[#ff6700] px-[30px] py-16 text-cream md:px-16 md:py-32">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="font-display text-5xl uppercase md:text-[100px]">
+          <h2 className="font-display text-4xl uppercase md:text-[100px] md:leading-tight">
             Experimenta <br/><span className="text-yellow-300">OUPAAAAA</span>
           </h2>
           <form className="mx-auto mt-8 grid max-w-2xl gap-4">
@@ -661,16 +677,14 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
         </div>
       </section>
 
-      <section className="bg-[#ff6700] px-4 pb-10 pt-10 md:px-24 ">
+      <section className="bg-[#ff6700] px-[30px] pb-10 pt-10 md:px-24">
         <footer className="bg-yellow-300 border-2 border-stone-900 mx-auto px-4 py-10 md:px-6 rounded-3xl shadow-[3px_3px_0_#000000]">
-          <div className="mx-auto flex flex-col items-start justify-between gap-8 md:flex-row justify-between">
-            {/* Left: Icon */}
-            <div className="flex-shrink-0 items-center w-[30%] text-center justify-center">
+          <div className="mx-auto flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-between">
+            <div className="flex-shrink-0 text-center">
               <img src={logoRed} alt="Oupa" className="w-32 md:w-[300px]" />
             </div>
 
-            {/* Center: Vertical Menu */}
-            <div className="flex flex-col gap-3 text-lg font-display uppercase w-[30%]  text-center">
+            <div className="flex flex-col gap-3 text-lg font-display uppercase text-center">
               <a href="#products" className="text-stone-900 hover:underline">Produtos</a>
               <a href="#about" className="text-stone-900 hover:underline">Sobre Nós</a>
               <a href="#how" className="text-stone-900 hover:underline">Parcerias</a>
@@ -678,8 +692,7 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
               <a href="#contact" className="text-stone-900 hover:underline">Contacto</a>
             </div>
 
-            {/* Right: Social Media */}
-            <div className="flex flex-col gap-3 w-[30%] text-center">
+            <div className="flex flex-col gap-3 text-center">
               <p className="text-lg font-display uppercase text-stone-900">Segue-nos nas redes sociais</p>
               <div className="flex gap-4 text-center justify-center">
                 <a

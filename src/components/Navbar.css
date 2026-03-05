@@ -9,6 +9,7 @@
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   background-color: rgba(225, 245, 50, 0.7);
+  z-index: 1000;
 
   border-style: var(--border-style);
   border-color: var(--border-color);
@@ -18,6 +19,16 @@
   border-left-width: var(--border-left-width);
 
   border-radius: 80px;
+}
+
+.nb-navbar--open {
+  border-radius: 24px;
+}
+
+@media (min-width: 768px) {
+  .nb-navbar--open {
+    border-radius: 80px;
+  }
 }
 
 .nb-navbar__title {
@@ -44,7 +55,7 @@
 }
 
 .nb-navbar__contact {
-  background: #ff4035  ;
+  background: #ff4035;
   border: 2px solid #ffffff;
   color: #ffffff;
   box-shadow: 4px 4px 0 #000000;
@@ -52,8 +63,14 @@
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  font-size: 30px;
+  font-size: 20px;
   font-family: "Londrina Solid", sans-serif;
+}
+
+@media (min-width: 768px) {
+  .nb-navbar__contact {
+    font-size: 30px;
+  }
 }
 
 .view-all {

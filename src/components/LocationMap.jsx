@@ -14,7 +14,7 @@ export default function LocationMap() {
     <MapContainer
       center={[40.9253, -8.5428]}
       zoom={10}
-      style={{ height: '500px', width: '100%' }}
+      style={{ height: '500px', width: '100%', zIndex: 0 }}
       scrollWheelZoom={false}
     >
       <TileLayer
