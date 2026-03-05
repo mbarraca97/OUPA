@@ -46,6 +46,9 @@ import cafecaixa from './assets/images/cafedesign.png'
 import cafe from './assets/images/cafe.png'
 import cafeg from './assets/images/cafegrao.png'
 import mms from './assets/images/M_Ms sem fundo.png'
+import biscoff from './assets/images/biscoff.png'
+import brigadeiro from './assets/images/brigadeiro.png'
+import ferrero from './assets/images/ferrero.png'
 import Navbar from './components/Navbar'
 
 const products = [
@@ -87,6 +90,9 @@ const FLAVOURS = [
   { name: "MM's", image: mms },
   { name: 'Kinder', image: kinder },
   { name: 'Pistachio', image: pist },
+  { name: 'Biscoff', image: biscoff },
+  { name: 'Brigadeiro', image: brigadeiro },
+  { name: 'Ferrero', image: ferrero },
 ]
 
 const REVIEWS = [
@@ -125,6 +131,7 @@ const REVIEWS = [
 export default function App() {
   const aboutZoomImgRef = useRef(null)
   const [reviewIdx, setReviewIdx] = useState(0)
+  const [flavourIdx, setFlavourIdx] = useState(0)
   const [isMobile, setIsMobile] = useState(
     typeof window !== 'undefined' ? window.innerWidth < 768 : false
   )
@@ -301,38 +308,56 @@ export default function App() {
             {/* Left section - 70% */}
             <div className="w-full md:w-[70%]">
               <h2 className="font-display text-4xl uppercase md:text-7xl">Os nossos<span className="text-[#ff4035]"> sabores</span></h2>
-              <p className="mt-4 text-base md:text-xl">Gelados sem trocas nem baldrocas. 100% artesanais, com produção própria e um segredo especial</p>
+              <p className="mt-4 text-base md:text-xl">Gelados sem trocas nem baldrocas. 100% artesanais, com produção própria e um segredo especial.</p>
               
-              <div className="mt-8 w-full">
-                <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-[200px] md:max-w-[700px]">
-                  {FLAVOURS.slice(0, 3).map((flavour) => (
-                    <div
-                      key={flavour.name}
-                      className="h-40 w-full md:w-60 md:h-60 rounded-3xl border-2 border-black p-4 md:p-8 flex flex-col mx-auto bg-yellow-300"
-                    >
-                      <img
-                        src={flavour.image}
-                        alt={flavour.name}
-                        className="h-20 md:h-40 w-full object-contain"
-                      />
-                      <p className="mt-auto text-center font-display text-base md:text-2xl font-bold uppercase">{flavour.name}</p>
-                    </div>
-                  ))}
-                  <div className="col-span-2 flex justify-center gap-4 md:col-span-3 md:gap-6 md:mt-[-150px]">
-                    {FLAVOURS.slice(3, 5).map((flavour) => (
+              <div className="relative mt-8 w-full">
+                <div className="overflow-hidden">
+                  <div
+                    className="flex items-stretch transition-transform duration-500 ease-out"
+                    style={{ transform: `translateX(-${flavourIdx * (isMobile ? 50 : 100 / 3)}%)` }}
+                  >
+                    {FLAVOURS.map((flavour) => (
                       <div
                         key={flavour.name}
-                        className="h-40 w-full max-w-[calc(50%-8px)] md:w-60 md:h-60 md:max-w-none rounded-3xl border-2 border-black p-4 md:p-8 flex flex-col bg-yellow-300"
+                        className="w-1/2 md:w-1/3 shrink-0 px-2"
                       >
-                        <img
-                          src={flavour.image}
-                          alt={flavour.name}
-                          className="h-20 md:h-40 w-full object-contain"
-                        />
-                        <p className="mt-auto text-center font-display text-base md:text-2xl font-bold uppercase">{flavour.name}</p>
+                        <div className="h-40 w-full md:h-60 rounded-3xl border-2 border-black p-4 md:p-8 flex flex-col bg-yellow-300">
+                          <img
+                            src={flavour.image}
+                            alt={flavour.name}
+                            className="h-20 md:h-40 w-full object-contain"
+                          />
+                          <p className="mt-auto text-center font-display text-base md:text-2xl font-bold uppercase">{flavour.name}</p>
+                        </div>
                       </div>
                     ))}
                   </div>
+                </div>
+
+                <button
+                  type="button"
+                  aria-label="Sabor anterior"
+                  className="absolute left-0 top-1/2 z-10 grid h-10 w-10 md:h-12 md:w-12 -translate-x-2 md:-translate-x-5 -translate-y-1/2 place-items-center rounded-full border-2 border-stone-900 bg-[#ff4035] text-white shadow-[3px_3px_0_#000000] active:translate-y-[calc(-50%+2px)] active:shadow-[1px_1px_0_#000000]"
+                  onClick={() => setFlavourIdx((i) => (i - 1 + FLAVOURS.length) % FLAVOURS.length)}
+                >
+                  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                    <path d="M14.5 5 8 12l6.5 7" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+
+                <button
+                  type="button"
+                  aria-label="Próximo sabor"
+                  className="absolute right-0 top-1/2 z-10 grid h-10 w-10 md:h-12 md:w-12 translate-x-2 md:translate-x-5 -translate-y-1/2 place-items-center rounded-full border-2 border-stone-900 bg-[#ff4035] text-white shadow-[3px_3px_0_#000000] active:translate-y-[calc(-50%+2px)] active:shadow-[1px_1px_0_#000000]"
+                  onClick={() => setFlavourIdx((i) => (i + 1) % FLAVOURS.length)}
+                >
+                  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                    <path d="M9.5 5 16 12l-6.5 7" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+
+                <div className="mt-4 font-display text-sm uppercase text-stone-900 text-center">
+                  {flavourIdx + 1} / {FLAVOURS.length}
                 </div>
               </div>
             </div>
