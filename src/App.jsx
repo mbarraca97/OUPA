@@ -25,7 +25,7 @@ import orange from './assets/images/7BhBbTDmSRIGr4rrhOeTq533zrs.png'
 import lemonSlice from './assets/images/niOj84Yrf0VAZUXpG69CZUWrg.png'
 import berries from './assets/images/MswwAB8XnYNDrd9o4g6ZHqC2MLw.png'
 import canTilt from './assets/images/yNbUcie2HCyvvKtNFvAyziYjg.png'
-import avatarEmma from './assets/images/8rlG4yox0w8UXpoOaYWvFzPZTs.png'
+import avatarMagg from './assets/images/magg_agency_logo.jpeg'
 import avatarJames from './assets/images/Yb8nDxvwZAN07pPgqJS26suXipM.jpg'
 import gelado from './assets/images/Gelado Sem Fundo.png'
 import mmVermelho from './assets/images/M_M vermelho sem fundo.png'
@@ -97,34 +97,34 @@ const FLAVOURS = [
 
 const REVIEWS = [
   {
-    title: 'Sabe mesmo a caseiro!',
-    body: 'A textura é super cremosa e o sabor é intenso — dá para perceber que é feito com ingredientes de verdade. Virou tradição cá em casa ao domingo.',
-    name: 'Inês M.',
-    meta: 'Porto',
+    title: 'Vai de uma casa para outra!',
+    body: 'Oupa. A nova marca de gelados que vai de uma casa para outra e tem um toque nortenho',
+    name: 'Revista MAGG',
+    meta: 'Portugal',
   },
   {
     title: 'A melhor carrinha de gelados',
     body: 'Contratámos para um aniversário e foi um sucesso total. Atendimento impecável, gelados artesanais e toda a gente repetiu (eu incluído).',
     name: 'Rui A.',
-    meta: 'Lisboa',
+    meta: 'Porto',
   },
   {
     title: 'Doce, mas no ponto certo',
     body: 'Não é enjoativo, é equilibrado e fresco. O sabor a fruta parece mesmo fruta — nada artificial. Recomendo muito!',
     name: 'Beatriz S.',
-    meta: 'Braga',
+    meta: 'Santa Maria da Feira',
   },
   {
     title: 'Crocante + cremoso = perfeito',
     body: 'Adorei a mistura de toppings e a base do gelado. Dá para sentir o cuidado artesanal. Já quero provar todos os sabores.',
     name: 'Miguel P.',
-    meta: 'Aveiro',
+    meta: 'Espinho',
   },
   {
     title: 'Feito com amor (e nota-se)',
     body: 'Levei para um evento de empresa e foi a estrela da festa. Gelados incríveis, equipa simpática e tudo muito bem organizado.',
     name: 'Sofia T.',
-    meta: 'Coimbra',
+    meta: 'S.J. da Madeira',
   },
 ]
 
@@ -226,9 +226,9 @@ export default function App() {
 
               {/* Button row + floating image to the right */}
               <div className="mt-8 md:mt-16 flex flex-col items-center justify-center gap-5 sm:flex-row sm:justify-center pt-8 md:pt-16">
-                <button className="rounded-full border-2 border-white bg-yellow-300 px-6 py-2 md:px-8 md:py-3 font-display text-xl md:text-[30px] font-[300] uppercase text-white shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000]">
+                <a href="#locations" className="rounded-full border-2 border-white bg-yellow-300 px-6 py-2 md:px-8 md:py-3 font-display text-xl md:text-[30px] font-[300] uppercase text-white shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000]">
                   Saber Mais
-                </button>
+                </a>
 
              
               </div>
@@ -255,7 +255,7 @@ export default function App() {
                 className="rounded-[2rem] border-2 border-black bg-center bg-cover bg-no-repeat p-5 text-stone-900"
                 style={{ backgroundImage: `url(${fundBg})` }}
               >
-                <img src={item.image} alt={item.name} className="mx-auto h-72 object-contain" />
+                <img src={item.image} alt={item.name} className="mx-auto h-72 md:h-96 object-contain scale-110 md:scale-125" />
                 <h3 className="mt-4 font-display text-3xl uppercase text-white text-center">{item.name}</h3>
               </article>
             ))}
@@ -296,9 +296,9 @@ export default function App() {
             />
           </div>
         </div>
-        <h3 className="font-display text-3xl uppercase md:text-[68px] md:leading-tight text-center text-white">a <span className="text-yellow-200">oupa</span> é uma marca de gelados artesanais que te vai fazer comer e chorar por mais.</h3>
+        <h3 className="font-display text-3xl uppercase md:text-[68px] md:leading-tight text-center text-white"> Mais vale um gelado da <span className="text-yellow-200">oupa</span> na mão do que dois no congelador.</h3>
         <div className="mt-8 text-center">
-            <button className="view-all">saber mais</button>
+            <a href="#locations" className="view-all">saber mais</a>
           </div>
       </section>
 
@@ -462,7 +462,7 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
               >
                 {[...REVIEWS, REVIEWS[0]].map((r, idx) => {
                   const realIdx = idx % REVIEWS.length
-                  const avatarSrc = realIdx === 0 ? avatarEmma : realIdx === 1 ? avatarJames : null
+                  const avatarSrc = realIdx === 0 ? avatarMagg : realIdx === 1 ? avatarJames : null
                   const initials = r.name
                     .replace('.', '')
                     .split(' ')
@@ -555,10 +555,10 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
           draggable="false"
         />
           <img
-          src={cafeg}
+          src={biscoff}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/8 bottom-10 hidden animate-float-slow select-none md:block w-[200px]"
+          className="pointer-events-none absolute left-1/8 bottom-10 hidden animate-float-slow select-none md:block w-[300px]"
           draggable="false"
         />
 
@@ -719,7 +719,7 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
               <p className="text-lg font-display uppercase text-stone-900">Segue-nos nas redes sociais</p>
               <div className="flex gap-4 text-center justify-center">
                 <a
-                  href="https://facebook.com"
+                  href="http://facebook.com/oupafabricagelados/?locale=pt_PT"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-stone-900 hover:underline font-display uppercase"
@@ -727,12 +727,20 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
                   Facebook
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/oupa_fabricagelados/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-stone-900 hover:underline font-display uppercase"
                 >
                   Instagram
+                </a>
+                <a
+                  href="https://www.tiktok.com/@oupa_fabricagelados"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-stone-900 hover:underline font-display uppercase"
+                >
+                  TikTok
                 </a>
               </div>
             </div>
