@@ -693,9 +693,9 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
               <p className="font-display text-base md:text-xl text-stone-900 mb-4 md:mb-8">
                 Escolhe entre os nossos sabores artesanais e nós entregamos tudo fresquinho. Perfeito para momentos especiais em família ou para surpreender alguém especial.
               </p>
-              <button className="rounded-full border-2 border-stone-900 bg-[#662d91] px-8 py-4 font-display text-xl font-white uppercase text-white shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000] w-fit">
+              <a href="#contact" className="rounded-full border-2 border-stone-900 bg-[#662d91] px-8 py-4 font-display text-xl font-white uppercase text-white shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000] w-fit inline-block text-center">
                 Contacta-nos
-              </button>
+              </a>
             </div>
             </AnimateInView>
           </div>
