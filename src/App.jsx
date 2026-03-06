@@ -250,7 +250,7 @@ export default function App() {
               return (
                 <AnimateInView key={i} animation={dir}>
                   <article
-                    className="rounded-[2rem] border-2 border-black bg-center bg-cover bg-no-repeat min-h-[280px] md:min-h-[360px]"
+                    className="rounded-[2rem] border-2 border-black bg-center bg-cover bg-no-repeat min-h-[360px] md:min-h-[360px]"
                     style={{ backgroundImage: `url(${item.src})` }}
                   />
                   <p className="mt-4 text-center font-display text-2xl md:text-3xl uppercase text-white">{item.label}</p>
