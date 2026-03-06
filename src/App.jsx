@@ -16,33 +16,21 @@ import fundo from './assets/images/fundo.png'
 import sl1 from './assets/images/sl1.png'
 import sl2 from './assets/images/sl2.png'
 import sl3 from './assets/images/sl3.png'
-import blackCan from './assets/images/CekZngiy07rr4FTLTw2x1KTx0FM.png'
-import strawCan from './assets/images/HVU8DJI30arjkpyNRnub8DZysdw.png'
-import boxPack from './assets/images/GoIeXeiU0JXucLyD8eiegaewLeU.png'
-import kiwi from './assets/images/26rDkkEPoHiNSRhg7FvTTrGP7Lg.png'
-import orange from './assets/images/7BhBbTDmSRIGr4rrhOeTq533zrs.png'
-import lemonSlice from './assets/images/niOj84Yrf0VAZUXpG69CZUWrg.png'
-import berries from './assets/images/MswwAB8XnYNDrd9o4g6ZHqC2MLw.png'
-import canTilt from './assets/images/yNbUcie2HCyvvKtNFvAyziYjg.png'
 import avatarMagg from './assets/images/magg_agency_logo.jpeg'
 import avatarJames from './assets/images/Yb8nDxvwZAN07pPgqJS26suXipM.jpg'
 import gelado from './assets/images/Gelado Sem Fundo.png'
 import mmVermelho from './assets/images/M_M vermelho sem fundo.png'
-import oupaLogoWhite from './assets/images/oupa/logo_white.png'
 import logoBlack from './assets/images/oupa/logo-black.png'
 import logoRed from './assets/images/oupa/logo_red.png'
-import logoOrange from './assets/images/oupa/logo_orange.png'
 
 import oreo from './assets/images/oreo.png'
 import kinder from './assets/images/kinder.png'
-import oreos from './assets/images/oreos.png'
 import rightImg from './assets/images/right.png'
 import leftImg from './assets/images/left.png'
 import icon1 from './assets/images/svg/1.png'
 import icon2 from './assets/images/svg/2.png'
 import icon3 from './assets/images/svg/3.png'
 import cafecaixa from './assets/images/cafedesign.png'
-import cafe from './assets/images/cafe.png'
 import cafeg from './assets/images/cafegrao.png'
 import mms from './assets/images/M_Ms sem fundo.png'
 import biscoff from './assets/images/biscoff.png'
@@ -253,7 +241,7 @@ export default function App() {
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
               { src: sl1, label: 'Caixa de Gelado' },
-              { src: sl2, label: 'Oups Shot' },
+              { src: sl2, label: 'Oupa Shot' },
               { src: sl3, label: 'Copo de Gelado' },
             ].map((item, i) => {
               const dir = i === 0 ? 'animate-fade-in-left' : i === 1 ? 'animate-fade-in-up' : 'animate-fade-in-right'
