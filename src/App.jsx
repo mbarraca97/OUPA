@@ -11,13 +11,12 @@ L.Icon.Default.mergeOptions({
 
 // Lazy load the map component to avoid StrictMode double initialization issues
 const LocationMap = lazy(() => import('./components/LocationMap'))
-import copoShot from './assets/images/coposhot.png'
-import caixafechada from './assets/images/caixafechada.png'
 import pist from './assets/images/pist2.png'
 import fundo from './assets/images/fundo.png'
-import fundBg from './assets/images/fund.png'
+import sl1 from './assets/images/sl1.png'
+import sl2 from './assets/images/sl2.png'
+import sl3 from './assets/images/sl3.png'
 import blackCan from './assets/images/CekZngiy07rr4FTLTw2x1KTx0FM.png'
-import copo from './assets/images/copo.png'
 import strawCan from './assets/images/HVU8DJI30arjkpyNRnub8DZysdw.png'
 import boxPack from './assets/images/GoIeXeiU0JXucLyD8eiegaewLeU.png'
 import kiwi from './assets/images/26rDkkEPoHiNSRhg7FvTTrGP7Lg.png'
@@ -51,12 +50,7 @@ import brigadeiro from './assets/images/brigadeiro.png'
 import ferrero from './assets/images/ferrero.png'
 import Navbar from './components/Navbar'
 import AnimateInView from './components/AnimateInView'
-
-const products = [
-  { name: 'Caixa de Gelado', price: '$15', image: caixafechada },
-  { name: 'Copo de Gelado', price: '$10', image: copo },
-  { name: 'Oupa Shot', price: '$12', image: copoShot },
-]
+import { useFloatScrollDecor } from './hooks/useFloatScrollDecor'
 
 const faq = [
   {
@@ -144,6 +138,8 @@ export default function App() {
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
+  useFloatScrollDecor()
+
   useEffect(() => {
     const el = aboutZoomImgRef.current
     if (!el) return
@@ -204,14 +200,16 @@ export default function App() {
             <img
               src={oreo}
               alt="oreo"
-              className="absolute -left-10 top-0 w-36 animate-fade-in-left-float select-none md:hidden"
+              data-float-decor
+              className="absolute -left-10 top-0 w-36 animate-fade-in-left select-none md:hidden"
               draggable="false"
             />
             <img
               src={oreo}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute left-[-5rem] mt-[-130px] hidden w-[300px] animate-fade-in-left-float select-none md:block"
+              data-float-decor
+              className="pointer-events-none absolute left-[-5rem] mt-[-130px] hidden w-[300px] animate-fade-in-left select-none md:block"
               draggable="false"
             />
 
@@ -238,7 +236,8 @@ export default function App() {
               src={mmVermelho}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute right-[-4rem] bottom-[6rem] w-[180px] animate-fade-in-up-float select-none md:right-[-12rem] md:bottom-auto md:top-1/2 md:w-[600px]"
+              data-float-decor
+              className="pointer-events-none absolute right-[-4rem] bottom-[6rem] w-[180px] animate-fade-in-up select-none md:right-[-12rem] md:bottom-auto md:top-1/2 md:w-[600px]"
               draggable="false"
             />
             </div>
@@ -252,17 +251,19 @@ export default function App() {
             <h2 className="font-display text-4xl uppercase md:text-[100px] md:leading-tight"> Produtos <span className="text-lime-300">Populares</span></h2>
           </AnimateInView>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {products.map((item, i) => {
+            {[
+              { src: sl1, label: 'Caixa de Gelado' },
+              { src: sl2, label: 'Oups Shot' },
+              { src: sl3, label: 'Copo de Gelado' },
+            ].map((item, i) => {
               const dir = i === 0 ? 'animate-fade-in-left' : i === 1 ? 'animate-fade-in-up' : 'animate-fade-in-right'
               return (
-                <AnimateInView key={item.name} animation={dir} style={{ animationDelay: `${i * 0.1}s` }}>
+                <AnimateInView key={i} animation={dir}>
                   <article
-                    className="rounded-[2rem] border-2 border-black bg-center bg-cover bg-no-repeat p-5 text-stone-900"
-                    style={{ backgroundImage: `url(${fundBg})` }}
-                  >
-                    <img src={item.image} alt={item.name} className="mx-auto h-72 md:h-96 object-contain scale-110 md:scale-125" />
-                    <h3 className="mt-4 font-display text-3xl uppercase text-white text-center">{item.name}</h3>
-                  </article>
+                    className="rounded-[2rem] border-2 border-black bg-center bg-cover bg-no-repeat min-h-[280px] md:min-h-[360px]"
+                    style={{ backgroundImage: `url(${item.src})` }}
+                  />
+                  <p className="mt-4 text-center font-display text-2xl md:text-3xl uppercase text-white">{item.label}</p>
                 </AnimateInView>
               )
             })}
@@ -281,7 +282,8 @@ export default function App() {
               src={pist}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute left-[-5rem] mt-[-180px] w-40 animate-fade-in-left-float select-none z-[2] md:w-[450px]"
+              data-float-decor
+              className="pointer-events-none absolute left-[-5rem] mt-[-180px] w-40 animate-fade-in-left select-none z-[2] md:w-[450px]"
               draggable="false"
             />
 
@@ -299,7 +301,8 @@ export default function App() {
               src={mmVermelho}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute right-[-6rem] top-1/2 w-48 -translate-y-1/2 animate-fade-in-right-float select-none z-[2] md:right-[-2rem] md:w-80"
+              data-float-decor="center"
+              className="pointer-events-none absolute right-[-6rem] top-1/2 w-48 -translate-y-1/2 animate-fade-in-right select-none z-[2] md:right-[-2rem] md:w-80"
               draggable="false"
             />
           </div>
@@ -555,28 +558,32 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
           src={oreo}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute left-[-3rem] top-20 hidden w-[200px] animate-fade-in-left-float select-none md:block"
+          data-float-decor
+          className="pointer-events-none absolute left-[-3rem] top-20 hidden w-[200px] animate-fade-in-left select-none md:block"
           draggable="false"
         />
         <img
           src={mmVermelho}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute right-[-2rem] top-1/2 -translate-y-1/2 hidden w-[200px] animate-fade-in-right-float select-none md:block"
+          data-float-decor="center"
+          className="pointer-events-none absolute right-[-2rem] top-1/2 -translate-y-1/2 hidden w-[200px] animate-fade-in-right select-none md:block"
           draggable="false"
         />
         <img
           src={cafeg}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/4 bottom-10 hidden w-28 animate-fade-in-left-float select-none md:block w-[200px]"
+          data-float-decor
+          className="pointer-events-none absolute left-1/4 bottom-10 hidden w-28 animate-fade-in-left select-none md:block w-[200px]"
           draggable="false"
         />
         <img
           src={biscoff}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/8 bottom-10 hidden animate-fade-in-left-float select-none md:block w-[300px]"
+          data-float-decor
+          className="pointer-events-none absolute left-1/8 bottom-10 hidden animate-fade-in-left select-none md:block w-[300px]"
           draggable="false"
         />
 
