@@ -170,17 +170,19 @@ export default function App() {
   }, [])
 
   return (
-    <main className="bg-[#4bc7dc] text-stone-900 overflow-x-hidden">
+    <>
       <Navbar />
-
-      <section className="relative overflow-hidden px-[30px] pb-16 pt-[150px] md:px-6 md:pb-24 md:mt-[-150px]">
-        {/* Top-right corner accent (rotated + partially out of frame) */}
-        <img
-          src={gelado}
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-28 top-[-250px] w-[36rem] rotate-[-45deg] opacity-95 animate-fade-in-down md:-right-[30rem] md:-top-[40rem] md:w-[70rem]"
-        />
+      <main className="-mt-24 bg-[#4bc7dc] text-stone-900 overflow-x-hidden md:-mt-32">
+      <section className="relative overflow-hidden px-[30px] pb-24 pt-[246px] md:px-6 md:pb-32 md:pt-[278px] md:mt-[-150px] min-h-[calc(100vh-6rem)] md:min-h-[calc(100vh-8rem)]">
+        {/* Top-right corner accent (rotated + partially out of frame). Wrapper has rotation so animate-fade-in-down doesn't override it. */}
+        <div className="pointer-events-none absolute -right-[200px] w-[36rem] rotate-[-45deg] md:-right-[30rem] md:-top-[40rem] md:w-[70rem] pt-[100px]">
+          <img
+            src={gelado}
+            alt=""
+            aria-hidden="true"
+            className="w-full opacity-95 animate-fade-in-down"
+          />
+        </div>
 
         <div className="mx-auto max-w-6xl">
           <div className="relative flex w-full flex-col items-center justify-center gap-8 pt-6 md:pt-[100px]">
@@ -587,10 +589,10 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
             </p>
           </AnimateInView>
 
-          <div className="grid gap-6 md:grid-cols-2 mt-16">
+          <div className="grid gap-6 md:grid-cols-2 mt-16 items-stretch">
             {/* Left Card */}
-            <AnimateInView animation="animate-fade-in-left">
-            <article className="rounded-3xl border-2 border-stone-900 bg-yellow-300 p-8 shadow-[4px_4px_0_#000000]">
+            <AnimateInView animation="animate-fade-in-left" className="h-full">
+            <article className="h-full rounded-3xl border-2 border-stone-900 bg-yellow-300 p-8 shadow-[4px_4px_0_#000000]">
               <h3 className="font-display text-2xl uppercase md:text-5xl md:leading-tight text-stone-900 mb-4">
                 Preços Atrativos
               </h3>
@@ -604,8 +606,8 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
             </AnimateInView>
 
             {/* Right Card */}
-            <AnimateInView animation="animate-fade-in-right">
-            <article className="rounded-3xl border-2 border-stone-900 bg-white p-8 shadow-[4px_4px_0_#000000]">
+            <AnimateInView animation="animate-fade-in-right" className="h-full">
+            <article className="h-full rounded-3xl border-2 border-stone-900 bg-white p-8 shadow-[4px_4px_0_#000000]">
               <h3 className="font-display text-2xl uppercase md:text-5xl md:leading-tight text-stone-900 mb-4">
                 Vantagens da Parceria
               </h3>
@@ -856,5 +858,6 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
         </div>
       )}
     </main>
+    </>
   )
 }
