@@ -132,6 +132,7 @@ export default function App() {
   const aboutZoomImgRef = useRef(null)
   const [reviewIdx, setReviewIdx] = useState(0)
   const [flavourIdx, setFlavourIdx] = useState(0)
+  const [modal, setModal] = useState(null)
   const [isMobile, setIsMobile] = useState(
     typeof window !== 'undefined' ? window.innerWidth < 768 : false
   )
@@ -678,22 +679,39 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
           <h2 className="font-display text-4xl uppercase md:text-[100px] md:leading-tight">
             Experimenta <br/><span className="text-yellow-300">OUPAAAAA</span>
           </h2>
-          <form className="mx-auto mt-8 grid max-w-2xl gap-4">
+          <form
+            action="https://formsubmit.co/geral@oupagelados.pt"
+            method="POST"
+            className="mx-auto mt-8 grid max-w-2xl gap-4"
+          >
+            <input type="hidden" name="_subject" value="Nova mensagem do site Oupa" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://oupagelados.pt/#contact" />
+            <input type="text" name="_honey" style={{ display: 'none' }} />
             <input 
               className="rounded-full border-2 border-stone-900 px-4 py-3 text-stone-900 bg-white shadow-[3px_3px_0_#000000]" 
-              placeholder="Nome" 
+              placeholder="Nome"
+              name="name"
               type="text"
+              required
             />
             <input 
               className="rounded-full border-2 border-stone-900 px-4 py-3 text-stone-900 bg-white shadow-[3px_3px_0_#000000]" 
-              placeholder="Email" 
+              placeholder="Email"
+              name="email"
               type="email"
+              required
             />
             <textarea 
               className="rounded-3xl border-2 border-stone-900 px-4 py-3 text-stone-900 bg-white shadow-[3px_3px_0_#000000] min-h-[120px] resize-none" 
               placeholder="Mensagem"
+              name="message"
+              required
             />
-            <button className="rounded-full border-2 border-stone-900 bg-lime-300 px-6 py-3 font-black uppercase text-stone-900 shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000]">
+            <button
+              type="submit"
+              className="rounded-full border-2 border-stone-900 bg-lime-300 px-6 py-3 font-black uppercase text-stone-900 shadow-[3px_3px_0_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0_#000000]"
+            >
               Submeter
             </button>
           </form>
@@ -750,12 +768,63 @@ Podemos estar presentes na sua festa! Vamos tornar todos os momentos mais doces,
         {/* Bottom Box as separate section */}
         <section className="bg-yellow-300 border-2 border-stone-900 rounded-3xl mx-auto mt-5 py-6 shadow-[3px_3px_0_#000000]">
           <div className="flex flex-col items-center justify-between gap-4 px-4 text-xs font-display uppercase text-stone-900 md:flex-row md:gap-6">
-            <a href="#" className="hover:underline">Terms of Service</a>
-            <a href="#" className="hover:underline">Privacy Policy</a>
-            <p>Developed by Sacra Studio</p>
+            <button className="hover:underline" onClick={() => setModal('tos')}>Termos de Serviço</button>
+            <button className="hover:underline" onClick={() => setModal('privacy')}>Política de Privacidade</button>
+            <a href="https://www.sacra.pt" target="_blank" rel="noopener noreferrer" className="hover:underline">Developed by Sacra Studio</a>
           </div>
         </section>
       </section>
+      {modal && (
+        <div
+          className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/50 px-4"
+          onClick={() => setModal(null)}
+        >
+          <div
+            className="relative max-h-[80vh] w-full max-w-2xl overflow-y-auto rounded-3xl border-2 border-stone-900 bg-white p-6 shadow-[4px_4px_0_#000000] md:p-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border-2 border-stone-900 bg-yellow-300 font-display text-xl shadow-[2px_2px_0_#000000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0_#000000]"
+              onClick={() => setModal(null)}
+              aria-label="Fechar"
+            >
+              ✕
+            </button>
+
+            {modal === 'tos' && (
+              <div className="pr-8">
+                <h2 className="font-display text-3xl uppercase md:text-5xl md:leading-tight mb-6">Termos de Serviço</h2>
+                <div className="space-y-4 text-sm md:text-base text-stone-700">
+                  <p><strong>1. Identificação</strong><br />O presente website é propriedade da Oupa — Fábrica de Gelados, com sede em Portugal.</p>
+                  <p><strong>2. Objeto</strong><br />Este website tem carácter informativo e destina-se a apresentar os produtos e serviços da marca Oupa, incluindo gelados artesanais, parcerias com restaurantes e serviço de eventos com a Oupa Truck.</p>
+                  <p><strong>3. Utilização do Website</strong><br />O utilizador compromete-se a utilizar o website de forma lícita, não podendo reproduzir, distribuir ou modificar os conteúdos sem autorização prévia e escrita da Oupa.</p>
+                  <p><strong>4. Propriedade Intelectual</strong><br />Todos os conteúdos presentes neste website — incluindo textos, imagens, logótipos e design — são propriedade da Oupa ou utilizados com a devida autorização, estando protegidos pela legislação portuguesa e europeia de propriedade intelectual.</p>
+                  <p><strong>5. Formulário de Contacto</strong><br />O formulário de contacto disponível no website destina-se exclusivamente a permitir que os utilizadores enviem mensagens à Oupa. Não armazenamos nem retemos quaisquer dados pessoais submetidos através do formulário.</p>
+                  <p><strong>6. Limitação de Responsabilidade</strong><br />A Oupa não se responsabiliza por eventuais erros, omissões ou desatualizações nos conteúdos do website, nem por danos resultantes da utilização ou impossibilidade de utilização do mesmo.</p>
+                  <p><strong>7. Alterações</strong><br />A Oupa reserva-se o direito de alterar os presentes Termos de Serviço a qualquer momento, sem aviso prévio.</p>
+                  <p><strong>8. Lei Aplicável</strong><br />Os presentes termos regem-se pela legislação portuguesa. Qualquer litígio será submetido aos tribunais competentes em Portugal.</p>
+                </div>
+              </div>
+            )}
+
+            {modal === 'privacy' && (
+              <div className="pr-8">
+                <h2 className="font-display text-3xl uppercase md:text-5xl md:leading-tight mb-6">Política de Privacidade</h2>
+                <div className="space-y-4 text-sm md:text-base text-stone-700">
+                  <p><strong>1. Responsável pelo Tratamento</strong><br />O responsável pelo website é a Oupa — Fábrica de Gelados, com sede em Portugal.</p>
+                  <p><strong>2. Dados Recolhidos</strong><br />A Oupa não recolhe, armazena nem processa quaisquer dados pessoais dos visitantes deste website. Não utilizamos cookies de rastreamento, ferramentas de análise nem qualquer outro mecanismo de recolha de dados.</p>
+                  <p><strong>3. Formulário de Contacto</strong><br />As mensagens enviadas através do formulário de contacto são encaminhadas diretamente para o nosso email através de um serviço externo (Formsubmit). A Oupa não armazena estas mensagens em nenhuma base de dados própria. O serviço Formsubmit atua apenas como intermediário de envio.</p>
+                  <p><strong>4. Cookies</strong><br />Este website não utiliza cookies próprios. Poderão existir cookies estritamente necessários ao funcionamento técnico do website, mas nenhum é utilizado para fins de rastreamento ou marketing.</p>
+                  <p><strong>5. Partilha de Dados com Terceiros</strong><br />Não partilhamos quaisquer dados com terceiros, uma vez que não recolhemos dados pessoais dos nossos visitantes.</p>
+                  <p><strong>6. Direitos dos Utilizadores</strong><br />Nos termos do Regulamento Geral sobre a Proteção de Dados (RGPD), qualquer utilizador pode exercer os seus direitos de acesso, retificação, eliminação e portabilidade dos seus dados, contactando-nos através de geral@oupagelados.pt. No entanto, dado que não recolhemos dados, não haverá informações a disponibilizar.</p>
+                  <p><strong>7. Alterações à Política</strong><br />A Oupa reserva-se o direito de atualizar esta Política de Privacidade a qualquer momento. Quaisquer alterações serão publicadas nesta página.</p>
+                  <p><strong>8. Contacto</strong><br />Para questões relacionadas com privacidade, contacte-nos através de geral@oupagelados.pt.</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </main>
   )
 }
